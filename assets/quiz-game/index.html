@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metabolic SNP Mastery Quiz</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:#f4f7f6; display:flex; justify-content:center; padding-top:40px; margin:0; }
+        #root { width:100%; max-width:680px; padding:0 16px; }
+        .card { background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:24px; margin-bottom:16px; }
+        h1 { margin-top:0; color:#1a202c; }
+        .subtitle { color:#718096; margin-bottom:20px; }
+        .btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 16px; border-radius:8px; border:1px solid #e2e8f0; background:#edf2f7; cursor:pointer; font-size:14px; font-weight:500; transition:all 0.15s; color:#2d3748; }
+        .btn:hover { background:#e2e8f0; }
+        .btn-primary { background:#2b6cb0; color:#fff; border-color:#2b6cb0; }
+        .btn-primary:hover { background:#2c5282; }
+        .btn-success { background:#38a169; color:#fff; border-color:#38a169; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; margin-top:12px; }
+        .category-btn { text-align:left; padding:14px; border-radius:10px; background:#fff; border:1px solid #e2e8f0; cursor:pointer; }
+        .category-btn:hover { border-color:#cbd5e0; background:#f7fafc; }
+        .category-btn .cat-name { font-weight:600; color:#2d3748; display:block; }
+        .category-btn .cat-count { font-size:12px; color:#718096; }
+        .option { display:flex; align-items:center; padding:12px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:8px; cursor:pointer; text-align:left; background:#fff; }
+        .option:hover { border-color:#90cdf4; background:#ebf8ff; }
+        .progress { height:6px; background:#edf2f7; border-radius:3px; overflow:hidden; margin-bottom:16px; }
+        .progress-bar { height:100%; background:#2b6cb0; transition:width 0.3s; }
+        .badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:600; background:#bee3f8; color:#2b6cb0; }
+        .score-row { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+        .score-bar-bg { flex:1; height:10px; background:#edf2f7; border-radius:5px; overflow:hidden; }
+        .score-bar-fill { height:100%; border-radius:5px; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+
+        // Embedded fallback data (loaded from gameData.json at build time)
+        const fallbackData = { "title": "Metabolic SNP Mastery Quiz", "description": "Choose a category or play all topics.", "categories": ["ARCHETYPES","COLON","DETOX PRIMING","GATEWAY","LIVER PHASE I","LIVER PHASE II","METHYLATION","MITOCHONDRIA","ONE-CARBON","RENAL","SENSITIVITY","SKIN/LUNGS"], "questions": [{"id":1,"category":"DETOX PRIMING","question":"A patient is GSTM1 Null and GSTT1 Null. What is the primary clinical risk?","options":["Rapid drug metabolism","Inability to conjugate environmental carcinogens effectively","Overproduction of glutathione","Impaired vitamin K recycling"],"correct":1},{"id":2,"category":"DETOX PRIMING","question":"Which micronutrient is most critical for supporting the function of GST enzymes?","options":["Vitamin K2","Selenium","Calcium","B12"],"correct":1},{"id":3,"category":"METHYLATION","question":"The MTHFR C677T variant is most associated with what clinical marker?","options":["Low triglycerides","Elevated Homocysteine","Low glucose","Rapid codeine clearance"],"correct":1},{"id":4,"category":"METHYLATION","question":"A patient is homozygous MTHFR 677TT. Which supplement form should be prioritized over standard folic acid?","options":["Folinic acid","5-Methyltetrahydrofolate (5-MTHF)","Calcium folinate","Dietary folate alone"],"correct":1},{"id":5,"category":"ONE-CARBON","question":"What is the 'Methyl Trap' in the context of MTR/MTRR?","options":["High levels of B12 in the blood","A state where folate is stuck as 5-MTHF because B12/MTR is non-functional","Excess methylation of DNA","Lack of folic acid intake"],"correct":1},{"id":6,"category":"ONE-CARBON","question":"Which cofactor is essential to 'unlock' the methyl trap and allow remethylation to proceed?","options":["Vitamin C","Methylcobalamin (B12)","L-Carnitine","Zinc"],"correct":1},{"id":7,"category":"GATEWAY","question":"Reduced P-glycoprotein (P-gp) production (MDR1 SNP) leads to:","options":["Faster drug excretion","Sustained higher drug levels in the bloodstream","Complete blockage of the gut","Increased appetite"],"correct":1},{"id":8,"category":"GATEWAY","question":"Which drug is MOST affected by reduced P-gp intestinal efflux, leading to toxicity?","options":["Aspirin","Digoxin","Acetaminophen","Insulin"],"correct":1},{"id":9,"category":"LIVER PHASE I","question":"A CYP2D6 'Poor Metabolizer' will find which drug ineffective?","options":["Warfarin","Codeine (cannot convert to morphine)","Statins","Metformin"],"correct":1},{"id":10,"category":"LIVER PHASE I","question":"The CYP2C19*2 variant results in:","options":["Ultra-rapid drug clearance","Loss of function; clopidogrel cannot be activated","Increased warfarin sensitivity","Enhanced codeine metabolism"],"correct":1},{"id":11,"category":"LIVER PHASE II","question":"Slow Acetylators (NAT2) have a higher risk of what when taking isoniazid?","options":["Rapid clearance","Peripheral neuropathy","Low blood pressure","Vitamin D deficiency"],"correct":1},{"id":12,"category":"LIVER PHASE II","question":"COMT Met/Met ('Worrier') individuals experience:","options":["Faster dopamine and estrogen clearance","Slow dopamine/estrogen clearance and higher pain sensitivity","No change in neurotransmitter metabolism","Better warfarin clearance"],"correct":1},{"id":13,"category":"RENAL","question":"The ACE SNP primarily regulates what?","options":["Liver enzyme production","Blood pressure and fluid-electrolyte balance","Glucose storage","Skin elasticity"],"correct":1},{"id":14,"category":"RENAL","question":"ACE DD genotype patients show the BEST response to which class of antihypertensives?","options":["Calcium channel blockers","ACE inhibitors","Alpha-blockers","Loop diuretics"],"correct":1},{"id":15,"category":"COLON","question":"Low LPL (Lipoprotein Lipase) function typically manifests as:","options":["Low cholesterol","Impaired triglyceride clearance and higher obesity risk","Rapid weight loss","Hypertension"],"correct":1},{"id":16,"category":"COLON","question":"Which APOE genotype carries the highest risk for late-onset Alzheimer disease?","options":["APOE e2/e2","APOE e3/e3","APOE e4/e4","APOE e2/e3"],"correct":2},{"id":17,"category":"SKIN/LUNGS","question":"The COMT Val158Met SNP affects the clearance of which chemicals?","options":["Triglycerides and Cholesterol","Dopamine and Estrogens","Urea and Creatinine","Glucagon and Insulin"],"correct":1},{"id":18,"category":"SKIN/LUNGS","question":"Homozygous SOD2 Ala/Ala (rs4880) carriers have reduced mitochondrial antioxidant capacity. Which mineral should be a priority?","options":["Manganese","Calcium","Potassium","Iron"],"correct":0},{"id":19,"category":"ARCHETYPES","question":"The 'Explorer' genotype is characterized by a high prevalence of which genetic trait?","options":["Ultra-rapid Acetylation","GSTM1/GSTT1 Null alleles","High LPL efficiency","Low susceptibility to chemicals"],"correct":1},{"id":20,"category":"ARCHETYPES","question":"The 'Thrifty' metabolic archetype (APOE e4, PPAR Pro/Pro) shows the greatest dietary benefit from:","options":["Ketogenic high-fat diet","Mediterranean diet low in saturated fat","High-protein bodybuilding diet","Standard American diet"],"correct":1},{"id":21,"category":"MITOCHONDRIA","question":"Which cofactor is essential for PPAR-gamma activity in fatty acid oxidation?","options":["Vitamin K","Chromium and Alpha-Lipoic Acid","Calcium","B12"],"correct":1},{"id":22,"category":"MITOCHONDRIA","question":"A patient with m.3243A>G (MT-TL1) is at risk for which mitochondrial syndrome?","options":["Leigh syndrome","MELAS (mitochondrial encephalomyopathy, lactic acidosis, stroke-like episodes)","Kearns-Sayre syndrome","LHON"],"correct":1},{"id":23,"category":"SENSITIVITY","question":"Who is at the HIGHEST risk for a severe Herxheimer reaction?","options":["Ultra-rapid acetylators","Slow acetylators with GSTM1/T1 Null alleles","High LPL efficiency","Nomad genotype"],"correct":1},{"id":24,"category":"SENSITIVITY","question":"The number one intervention BEFORE starting any detox protocol in a high-risk patient is:","options":["IV chelation","Glutathione IV push","GST priming with NAC and selenium for 2-4 weeks","High-dose saunas"],"correct":2},{"id":25,"category":"DETOX PRIMING","question":"Which glutathione precursor is most directly rate-limiting for GSH synthesis?","options":["Selenium","Glycine","Zinc","B12"],"correct":1},{"id":26,"category":"DETOX PRIMING","question":"Cruciferous vegetables induce which detoxification enzyme class?","options":["CYP450 (Phase I)","Glutathione S-transferase (Phase II)","NAT2 (acetylation)","COMT (methylation)"],"correct":1},{"id":27,"category":"METHYLATION","question":"The MTHFR A1298C variant primarily affects which pathway?","options":["Homocysteine elevation at the same magnitude as C677T","The BH4 (tetrahydrobiopterin) cycle and nitric oxide synthesis","The transsulfuration pathway directly","The urea cycle"],"correct":1},{"id":28,"category":"METHYLATION","question":"A compound heterozygote (MTHFR C677T + A1298C) has approximately what percent of normal enzyme activity?","options":["90%","60%","30%","15%"],"correct":1},{"id":29,"category":"ONE-CARBON","question":"MTRR (methionine synthase reductase) regenerates which form of B12 required by MTR?","options":["Cyanocobalamin","Methylcobalamin","Adenosylcobalamin","Hydroxocobalamin"],"correct":1},{"id":30,"category":"ONE-CARBON","question":"Which nutrient directly donates methyl groups to the homocysteine remethylation reaction via the BHMT pathway?","options":["SAMe","Betaine (trimethylglycine)","Folate","Serine"],"correct":1},{"id":31,"category":"GATEWAY","question":"Berberine's interaction with drug transport is primarily via:","options":["P-gp induction only","CYP3A4 induction only","Both P-gp and CYP3A4 inhibition, raising drug levels","P-gp inhibition alone"],"correct":2},{"id":32,"category":"GATEWAY","question":"St. John's Wort is contraindicated with P-gp substrates because it:","options":["Inhibits P-gp and CYP3A4 simultaneously","Potently induces both P-gp and CYP3A4, reducing drug levels","Has no effect on P-gp","Only inhibits P-gp"],"correct":1},{"id":33,"category":"LIVER PHASE I","question":"The CYP3A5*3/*3 genotype results in:","options":["Normal CYP3A5 expression","Complete absence of CYP3A5 expression (non-expressor)","3-fold increased expression","Reduced but present expression"],"correct":1},{"id":34,"category":"LIVER PHASE I","question":"Which of the following is PRIMARY source of reducing equivalents for CYP450 enzymes?","options":["NADH","NADPH from POR (cytochrome P450 oxidoreductase)","FADH2","CoQH2"],"correct":1},{"id":35,"category":"LIVER PHASE II","question":"UGT1A1*28 results in:","options":["Increased glucuronidation activity","Reduced glucuronidation (TA7 repeat); irinotecan toxicity risk","Enhanced warfarin metabolism","No clinical consequence"],"correct":1},{"id":36,"category":"LIVER PHASE II","question":"Which vitamin supports NAT2 function as an acetyl-CoA substrate?","options":["Pantothenic acid (B5)","Riboflavin (B2)","Niacin (B3)","Thiamine (B1)"],"correct":0},{"id":37,"category":"RENAL","question":"For ACE II genotype patients with hypertension, which drug class is preferred over ACE inhibitors?","options":["ARBs (angiotensin receptor blockers)","Thiazide diuretics","Beta-blockers","Alpha-agonists"],"correct":0},{"id":38,"category":"RENAL","question":"SLC2A9 rs16890979 T allele carriers show:","options":["Increased urate clearance and lower gout risk","Reduced urate clearance and higher gout risk","No change in urate","Enhanced allopurinol clearance"],"correct":1},{"id":39,"category":"COLON","question":"PPAR-gamma Pro12Ala (Ala allele) carriers have:","options":["Increased diabetes risk","Enhanced insulin sensitivity and protection from type 2 diabetes","No metabolic difference","Higher LDL cholesterol"],"correct":1},{"id":40,"category":"COLON","question":"CPT1A P479L (rs80356779) is found in which population and confers advantage in:","options":["European; athletic performance","Inuit/Arctic populations; cold adaptation and ketogenesis","Asian populations; alcohol metabolism","African; malaria resistance"],"correct":1},{"id":41,"category":"SKIN/LUNGS","question":"MPO -463G>A (AA genotype) results in:","options":["Higher MPO expression and more oxidative lung damage","Lower MPO expression; cardioprotective","No change in enzyme activity","Increased cortisol production"],"correct":1},{"id":42,"category":"SKIN/LUNGS","question":"HMOX1 (GT)n repeat length correlates with:","options":["Red blood cell production","Heme oxygenase-1 inducibility and stress response","Thyroid function","Muscle protein synthesis"],"correct":1},{"id":43,"category":"ARCHETYPES","question":"A patient who is FTO rs9939609 TT has:","options":["Decreased appetite and lower obesity risk","Higher obesity risk due to appetite dysregulation","Enhanced fat oxidation","No metabolic consequence"],"correct":1},{"id":44,"category":"ARCHETYPES","question":"MC4R rs17782313 risk allele carriers show:","options":["Improved satiety signaling","Reduced satiety and increased caloric intake","Enhanced meal satisfaction","No weight-related phenotype"],"correct":1},{"id":45,"category":"MITOCHONDRIA","question":"CoQ10 functions in the electron transport chain at:","options":["Complex I only","Complex III (Q cycle, shuttling electrons from Complex I and II to III)","Complex IV only","Complex II only"],"correct":1},{"id":46,"category":"MITOCHONDRIA","question":"Which fatty acid oxidation disorder is the most common and presents with hypoketotic hypoglycemia during fasting?","options":["VLCAD deficiency","MCAD deficiency","CPT1A deficiency","CPT2 deficiency"],"correct":1},{"id":47,"category":"SENSITIVITY","question":"In acute Herxheimer reaction, which binder is MOST appropriate for mycotoxin (mold) exposure?","options":["Chlorella only","Activated charcoal + bentonite clay + Saccharomyces boulardii","Cholestyramine only","Magnesium citrate"],"correct":1},{"id":48,"category":"SENSITIVITY","question":"IV chelation during acute Herxheimer is contraindicated because:","options":["It is too slow to work","It removes the mobilizing agent but leaves a rebound toxin surge with no clearance capacity","It causes permanent kidney damage immediately","It has no effect"],"correct":1}] };
+
+        function QuizApp() {
+            const [gameData, setGameData] = useState(null);
+            const [selectedCategory, setSelectedCategory] = useState(null);
+            const [current, setCurrent] = useState(0);
+            const [score, setScore] = useState(0);
+            const [answers, setAnswers] = useState([]);
+            const [showScore, setShowScore] = useState(false);
+            const [categoryScores, setCategoryScores] = useState({});
+
+            useEffect(() => {
+                fetch('./gameData.json')
+                    .then(r => r.ok ? r.json() : Promise.reject())
+                    .then(d => setGameData(d))
+                    .catch(() => setGameData(fallbackData));
+            }, []);
+
+            const categories = useMemo(() => {
+                if (!gameData) return [];
+                const cats = gameData.categories || [];
+                const byCat = {};
+                cats.forEach(c => byCat[c] = { count: 0, correct: 0 });
+                if (gameData.questions) {
+                    gameData.questions.forEach(q => {
+                        const c = q.category;
+                        if (byCat[c]) byCat[c].count++;
+                    });
+                }
+                return cats.map(c => ({ name: c, count: byCat[c]?.count || 0, correct: 0 }));
+            }, [gameData]);
+
+            const filteredQuestions = useMemo(() => {
+                if (!gameData) return [];
+                if (!selectedCategory || selectedCategory === 'ALL') return [...gameData.questions];
+                return gameData.questions.filter(q => q.category === selectedCategory);
+            }, [gameData, selectedCategory]);
+
+            useEffect(() => {
+                if (filteredQuestions.length > 0) {
+                    setCurrent(0); setScore(0); setAnswers([]); setShowScore(false);
+                    const init = {};
+                    categories.forEach(c => init[c.name] = 0);
+                    setCategoryScores(init);
+                }
+            }, [selectedCategory, filteredQuestions.length]);
+
+            if (!gameData) return <div style={{textAlign:'center',padding:40}}>Loading quiz data...</div>;
+
+            if (!selectedCategory) {
+                return (
+                    <div className="card">
+                        <h1>{gameData.title}</h1>
+                        <p className="subtitle">{gameData.description}</p>
+                        <div className="grid">
+                            <div className="category-btn" onClick={() => setSelectedCategory('ALL')}>
+                                <span className="cat-name">All Categories</span>
+                                <span className="cat-count">{gameData.questions?.length || 0} questions</span>
+                            </div>
+                            {categories.map(cat => (
+                                <div className="category-btn" key={cat.name} onClick={() => setSelectedCategory(cat.name)}>
+                                    <span className="cat-name">{cat.name}</span>
+                                    <span className="cat-count">{cat.count} questions</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                );
+            }
+
+            if (showScore) {
+                const pct = Math.round((score / filteredQuestions.length) * 100);
+                return (
+                    <div className="card">
+                        <h1>Quiz Complete</h1>
+                        <p className="subtitle">{selectedCategory === 'ALL' ? 'All Categories' : selectedCategory}</p>
+                        <div style={{fontSize:32, fontWeight:700, color:'#2b6cb0', marginBottom:8}}>{score} / {filteredQuestions.length}</div>
+                        <div style={{color:'#718096', marginBottom:20}}>{pct}% correct</div>
+                        <h3 style={{marginBottom:8}}>Review</h3>
+                        {filteredQuestions.map((q, idx) => {
+                            const userCorrect = answers[idx] === q.correct;
+                            return (
+                                <div key={q.id} style={{marginBottom:14, padding:12, borderRadius:8, background: userCorrect ? '#f0fff4' : '#fff5f5', border:'1px solid '+(userCorrect?'#c6f6d5':'#fed7d7')}}>
+                                    <div style={{fontSize:13, color:'#718096', marginBottom:4}}>Q{idx+1} — {q.category}</div>
+                                    <div style={{fontWeight:500, marginBottom:6}}>{q.question}</div>
+                                    <div style={{fontSize:13}}>
+                                        Your answer: <b style={{color:userCorrect?'#38a169':'#e53e3e'}}>{q.options[answers[idx]]}</b><br/>
+                                        {!userCorrect && <span>Correct: <b style={{color:'#38a169'}}>{q.options[q.correct]}</b></span>}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                        <div style={{marginTop:16, display:'flex', gap:10}}>
+                            <button className="btn btn-primary" onClick={() => setSelectedCategory(null)}>Choose Another Category</button>
+                            <button className="btn" onClick={() => { setCurrent(0); setScore(0); setAnswers([]); setShowScore(false); }}>Replay This Category</button>
+                        </div>
+                    </div>
+                );
+            }
+
+            const q = filteredQuestions[current];
+            if (!q) return null;
+
+            const handleAnswer = (index) => {
+                const isCorrect = index === q.correct;
+                const newAnswers = [...answers, index];
+                const newScore = isCorrect ? score + 1 : score;
+                setAnswers(newAnswers);
+                setScore(newScore);
+                if (current + 1 < filteredQuestions.length) {
+                    setCurrent(current + 1);
+                } else {
+                    setShowScore(true);
+                }
+            };
+
+            return (
+                <div className="card">
+                    <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
+                        <span className="badge">{q.category}</span>
+                        <span style={{color:'#718096', fontSize:14}}>{current + 1} of {filteredQuestions.length}</span>
+                    </div>
+                    <div className="progress">
+                        <div className="progress-bar" style={{width:`${((current)/filteredQuestions.length)*100}%`}}></div>
+                    </div>
+                    <h3 style={{marginTop:0, marginBottom:16}}>{q.question}</h3>
+                    <div>
+                        {q.options.map((opt, idx) => (
+                            <div className="option" key={idx} onClick={() => handleAnswer(idx)}>
+                                <span style={{width:28, height:28, borderRadius:'50%', background:'#edf2f7', display:'inline-flex', alignItems:'center', justifyContent:'center', marginRight:12, fontSize:13, fontWeight:600, flexShrink:0}}>{String.fromCharCode(65+idx)}</span>
+                                <span>{opt}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<QuizApp />);
+    </script>
+</body>
+</html>

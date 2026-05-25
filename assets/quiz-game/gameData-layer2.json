@@ -1,0 +1,150 @@
+{
+  "title": "So, You Think You Know Emunctorology?",
+  "description": "The ultimate precision challenge for the human-metabolic-SNP expert.",
+  "questions": [
+    {
+      "id": 1,
+      "category": "DETOX PRIMING",
+      "question": "A patient is GSTM1 Null and GSTT1 Null. What is the primary clinical risk?",
+      "options": [
+        "Rapid drug metabolism",
+        "Inability to conjugate environmental carcinogens effectively",
+        "Overproduction of glutathione",
+        "Impaired vitamin K recycling"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 2,
+      "category": "METHYLATION",
+      "question": "The MTHFR C677T variant is most associated with what clinical marker?",
+      "options": [
+        "Low triglycerides",
+        "Elevated Homocysteine",
+        "Low glucose",
+        "Rapid codeine clearance"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 3,
+      "category": "ONE-CARBON",
+      "question": "What is the 'Methyl Trap' in the context of MTR/MTRR?",
+      "options": [
+        "High levels of B12 in the blood",
+        "A state where folate is stuck as 5-MTHF because B12/MTR is non-functional",
+        "Excess methylation of DNA",
+        "Lack of folic acid intake"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 4,
+      "category": "GATEWAY",
+      "question": "Reduced P-glycoprotein (P-gp) production (MDR1 SNP) leads to:",
+      "options": [
+        "Faster drug excretion",
+        "Sustained higher drug levels in the bloodstream",
+        "Complete blockage of the gut",
+        "Increased appetite"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 5,
+      "category": "LIVER PHASE I",
+      "question": "A CYP2D6 'Poor Metabolizer' will find which drug ineffective?",
+      "options": [
+        "Warfarin",
+        "Codeine (cannot convert to morphine)",
+        "Statins",
+        "Metformin"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 6,
+      "category": "LIVER PHASE II",
+      "question": "Slow Acetylators (NAT2) have a higher risk of what when taking isoniazid?",
+      "options": [
+        "Rapid clearance",
+        "Peripheral neuropathy",
+        "Low blood pressure",
+        "Vitamin D deficiency"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 7,
+      "category": "RENAL",
+      "question": "The ACE SNP primarily regulates what?",
+      "options": [
+        "Liver enzyme production",
+        "Blood pressure and fluid-electrolyte balance",
+        "Glucose storage",
+        "Skin elasticity"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 8,
+      "category": "COLON",
+      "question": "Low LPL (Lipoprotein Lipase) function typically manifests as:",
+      "options": [
+        "Low cholesterol",
+        "Impaired triglyceride clearance and higher obesity risk",
+        "Rapid weight loss",
+        "Hypertension"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 9,
+      "category": "SKIN/LUNGS",
+      "question": "The COMT Val158Met SNP affects the clearance of which chemicals?",
+      "options": [
+        "Triglycerides and Cholesterol",
+        "Dopamine and Estrogens",
+        "Urea and Creatinine",
+        "Glucagon and Insulin"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 10,
+      "category": "ARCHETYPES",
+      "question": "The 'Explorer' genotype is characterized by a high prevalence of which genetic trait?",
+      "options": [
+        "Ultra-rapid Acetylation",
+        "GSTM1/GSTT1 Null alleles",
+        "High LPL efficiency",
+        "Low susceptibility to chemicals"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 11,
+      "category": "MITOCHONDRIA",
+      "question": "Which cofactor is la-essential for PPAR-gamma activity in fatty acid oxidation?",
+      "options": [
+        "Vitamin K",
+        "Chromium and Alpha-Lipoic Acid",
+        "Calcium",
+        "B12"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 12,
+      "category": "SENSITIVITY",
+      "question": "Who is at the HIGHEST risk for a severe Herxheimer reaction?",
+      "options": [
+        "Ultra-rapid acetylators",
+        "Slow acetylators with GSTM1/T1 Null alleles",
+        "High LPL efficiency",
+        "Nomad genotype"
+      ],
+      "correct": 1
+    }
+  ]
+}

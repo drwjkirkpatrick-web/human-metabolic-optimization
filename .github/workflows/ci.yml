@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Markdown lint
+        uses: DavidAnson/markdownlint-cli2-action@v15
+        with:
+          globs: '**/*.md'
+      - name: Check JSON validity
+        run: |
+          python -c "import json; json.load(open('assets/quiz-game/gameData.json'))"
+      - name: Check curriculum file count
+        run: |
+          echo "Worksheets: $(find curriculum/worksheets -name '*.md' | wc -l)"
+          echo "Quizzes: $(find curriculum/quizzes -name '*.md' | wc -l)"
+          echo "Clinical ref: $(find clinical-reference -name '*.md' | wc -l)"

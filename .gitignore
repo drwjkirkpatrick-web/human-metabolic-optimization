@@ -1,0 +1,21 @@
+# Large files
+*.pdf
+*.db
+*.tar.gz
+*.zip
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (if building quiz)
+node_modules/
+*.log
+
+# Temporary
+*.tmp
+*.temp
