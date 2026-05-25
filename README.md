@@ -239,7 +239,6 @@ MIT License — see LICENSE for details.
 
 ---
 
-**Maintained by:** Walker (Oregon naturopathic physician)  
 **Last Updated:** May 2026  
 **Skill Version:** 1.3  
 **Curriculum Weeks:** 12 core
