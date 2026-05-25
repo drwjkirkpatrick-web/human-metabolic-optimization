@@ -1,18 +1,28 @@
 # Human Metabolic Optimization
 
-A comprehensive clinical reference and progressive learning curriculum for human metabolic pathways, pharmacogenomic SNPs, and cofactor-guided nutritional medicine.
+**A comprehensive clinical reference and progressive learning curriculum for human metabolic pathways, pharmacogenomic SNPs, and cofactor-guided nutritional medicine.**
+
+This repository is designed as an **open educational resource** for students, educators, and healthcare professionals seeking to understand how genetic variation influences metabolism, drug response, and nutrient requirements. The content is presented for self-directed learning, classroom instruction, and clinical reference — not as a substitute for individualized medical care.
 
 **Live on:** https://github.com/drwjkirkpatrick-web/human-metabolic-optimization
 
 ---
 
-## What This Is
+## Educational Purpose
 
-Three layers in one repository:
+This is a **free, open-access curriculum** built around three integrated learning layers:
 
 1. **Clinical Reference** — 22 metabolic pathway tables covering 450+ enzymes, specific rs numbers, cDNA/protein changes, and mandatory vitamin/mineral cofactors for every step.
 2. **12-Week Curriculum** — Progressive learning plan from CPIC guidelines through multi-gene clinical integration, with worksheets and quizzes.
-3. **Interactive Quiz Game** — Browser-based knowledge checks with 24+ scenario-driven questions across 12 categories.
+3. **Interactive Quiz Game** — Category-selectable browser-based knowledge checks with 48 scenario-driven questions.
+
+**Who this is for:**
+- Academic programs in pharmacogenomics, nutritional biochemistry, or functional medicine
+- Self-directed learners building expertise in metabolic enzymology
+- Clinical training programs requiring structured cases and competency checks
+- Educators seeking ready-made worksheets, quizzes, and clinical scenarios
+
+This curriculum assumes prerequisite knowledge in basic genetics, pharmacology, and cell biology. It does not replace formal certification or supervised clinical training.
 
 **Built for:** Naturopathic physicians, functional medicine practitioners, pharmacists, genetic counselors, and students of clinical enzymology.
 
@@ -180,13 +190,25 @@ Every enzyme entry in `SKILL.md` lists required cofactors. This is not optional 
 
 ## Clinical Disclaimer
 
-This repository is for educational and research purposes for trained healthcare providers. It is not intended for self-diagnosis or as a substitute for professional medical advice.
+**All content in this repository is for educational and reference purposes only.**
 
-Key cautions:
+This curriculum is not a substitute for professional medical advice, diagnosis, or treatment. It does not replace the judgment of a qualified healthcare provider.
+
+If you intend to use any of the information here — including supplement protocols, dosing suggestions, dietary recommendations, or medication considerations — **you must first discuss them with your personal physician, pharmacist, or other licensed healthcare practitioner.** They are the only ones who can evaluate how this general educational material applies to your specific health situation.
+
+Goals for self-directed learners:
+- Understand how genes influence metabolism, drug response, and nutrient handling
+- Recognize when a question may warrant referral to a specialist or genetic counselor
+- Communicate more effectively with your healthcare team
+
+**This is not self-medicine.** The information here is general and educational. It cannot account for your personal medical history, current medications, allergies, pregnancy status, or other clinical details that require individualized professional assessment.
+
+Key cautions for healthcare providers and educators:
 - CYP phenotyping requires **activity score methodology** (CPIC guidelines)
-- Population frequencies vary significantly by ancestry
+- Population variant frequencies vary significantly by ancestry
 - Recommend **multi-gene pharmacogenomic panels** for complex patients
 - Very few single SNPs have clinically actionable consequences in isolation
+- Always verify information against current CPIC guidelines and PharmGKB before applying recommendations
 
 ---
 
