@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emunctorology & SNP Master Quiz — 72 Clinical Questions</title>
+<style>
+
+  :root {
+    --bg: #f8f9fa;
+    --bg-alt: #eef1f5;
+    --card: #ffffff;
+    --card-hover: #f0f4f8;
+    --primary: #2563eb;
+    --primary-light: #dbeafe;
+    --primary-dark: #1d4ed8;
+    --correct: #16a34a;
+    --correct-light: #dcfce7;
+    --correct-border: #86efac;
+    --incorrect: #dc2626;
+    --incorrect-light: #fee2e2;
+    --incorrect-border: #fca5a5;
+    --text: #1e293b;
+    --text-body: #334155;
+    --text-dim: #64748b;
+    --text-light: #94a3b8;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --warn: #f59e0b;
+    --warn-light: #fef3c7;
+    --radius: 14px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-body);
+    min-height: 100vh;
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top bar */
+  .topbar {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  .topbar-inner {
+    max-width: 820px; margin: 0 auto;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .topbar .logo {
+    font-size: 1.15em; font-weight: 700; color: var(--primary);
+    letter-spacing: -0.02em;
+  }
+  .topbar .logo-sub {
+    font-size: 0.78em; color: var(--text-dim); font-weight: 400;
+  }
+
+  #app {
+    max-width: 820px; margin: 0 auto; padding: 28px 24px 60px;
+  }
+
+  /* ---------- Start Screen ---------- */
+  .start-screen { text-align: center; }
+  .start-hero {
+    background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+    color: #fff; border-radius: var(--radius); padding: 36px 28px;
+    box-shadow: var(--shadow-lg); margin-bottom: 28px;
+  }
+  .start-hero h1 {
+    font-size: 1.6em; font-weight: 800; letter-spacing: -0.03em;
+    margin-bottom: 10px; line-height: 1.25;
+  }
+  .start-hero .tagline {
+    font-size: 0.95em; opacity: 0.9; max-width: 480px; margin: 0 auto;
+    line-height: 1.5;
+  }
+  .start-stats {
+    display: flex; justify-content: center; gap: 28px;
+    margin-top: 20px; padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+  .start-stats .stat { text-align: center; }
+  .start-stats .stat-num { font-size: 1.7em; font-weight: 800; }
+  .start-stats .stat-label { font-size: 0.78em; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .mode-cards { display: flex; flex-direction: column; gap: 12px; max-width: 460px; margin: 0 auto; }
+  .mode-btn {
+    display: flex; align-items: center; gap: 14px;
+    width: 100%; padding: 20px 22px;
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: var(--radius); color: var(--text);
+    font-size: 1.02em; cursor: pointer; transition: all 0.18s ease;
+    text-align: left; box-shadow: var(--shadow-sm);
+  }
+  .mode-btn:hover {
+    border-color: var(--primary); box-shadow: var(--shadow);
+    transform: translateY(-1px);
+  }
+  .mode-btn .icon {
+    font-size: 1.5em; flex-shrink: 0; width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--primary-light); border-radius: 12px;
+  }
+  .mode-btn .btn-content { flex: 1; }
+  .mode-btn .btn-title { font-weight: 700; font-size: 1.05em; }
+  .mode-btn .btn-desc {
+    display: block; font-size: 0.85em; color: var(--text-dim);
+    margin-top: 3px; font-weight: 400;
+  }
+
+  /* ---------- Category Select ---------- */
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .section-header h2 {
+    font-size: 1.3em; font-weight: 700; color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .back-btn {
+    padding: 8px 16px; background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text-dim); font-size: 0.88em;
+    cursor: pointer; transition: all 0.15s; font-weight: 500;
+  }
+  .back-btn:hover { border-color: var(--border-strong); color: var(--text); }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+  }
+  .cat-card {
+    padding: 18px 16px; background: var(--card); border: 1.5px solid var(--border);
+    border-radius: var(--radius); cursor: pointer; transition: all 0.18s ease;
+    text-align: center; box-shadow: var(--shadow-sm);
+  }
+  .cat-card:hover {
+    border-color: var(--primary); box-shadow: var(--shadow);
+    transform: translateY(-2px);
+  }
+  .cat-card .emoji { font-size: 2em; margin-bottom: 8px; }
+  .cat-card .name {
+    font-weight: 700; font-size: 0.92em; color: var(--text);
+    margin-bottom: 4px; letter-spacing: -0.01em;
+  }
+  .cat-card .desc {
+    font-size: 0.78em; color: var(--text-dim); line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .cat-card .count {
+    font-size: 0.75em; color: var(--primary); font-weight: 600;
+    background: var(--primary-light); padding: 2px 10px;
+    border-radius: 20px; display: inline-block;
+  }
+
+  /* ---------- Quiz Screen ---------- */
+  .quiz-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 24px;
+  }
+  .progress-bar {
+    flex: 1; height: 10px; background: var(--bg-alt);
+    border-radius: 6px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--primary), #7c3aed);
+    border-radius: 6px; transition: width 0.35s ease;
+  }
+  .progress-text {
+    color: var(--text-dim); font-size: 0.85em; font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .category-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; background: var(--primary-light);
+    border-radius: 20px; font-size: 0.82em; font-weight: 600;
+    color: var(--primary-dark); margin-bottom: 16px;
+  }
+
+  .question-card {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    box-shadow: var(--shadow-sm); margin-bottom: 16px;
+  }
+  .question-text {
+    font-size: 1.18em; color: var(--text); font-weight: 600;
+    line-height: 1.5; margin-bottom: 22px; letter-spacing: -0.01em;
+  }
+
+  .option-btn {
+    display: block; width: 100%; padding: 16px 18px; margin-bottom: 10px;
+    background: var(--card); border: 2px solid var(--border);
+    border-radius: 12px; color: var(--text-body); font-size: 0.98em;
+    cursor: pointer; transition: all 0.15s ease; text-align: left;
+    font-family: inherit; line-height: 1.5;
+  }
+  .option-btn:hover:not(.disabled) {
+    border-color: var(--primary); background: var(--card-hover);
+  }
+  .option-btn.selected {
+    border-color: var(--primary); background: var(--primary-light);
+  }
+  .option-btn.correct {
+    border-color: var(--correct-border); background: var(--correct-light);
+  }
+  .option-btn.incorrect {
+    border-color: var(--incorrect-border); background: var(--incorrect-light);
+  }
+  .option-btn.disabled { cursor: default; }
+  .option-letter {
+    font-weight: 700; margin-right: 10px; color: var(--primary);
+    font-size: 0.95em;
+  }
+  .option-btn.correct .option-letter { color: var(--correct); }
+  .option-btn.incorrect .option-letter { color: var(--incorrect); }
+
+  .explanation {
+    margin-top: 16px; padding: 18px 20px; background: var(--bg-alt);
+    border: 1px solid var(--border); border-left: 4px solid var(--primary);
+    border-radius: 12px; font-size: 0.92em; color: var(--text-body);
+    line-height: 1.6; display: none;
+  }
+  .explanation.show { display: block; }
+  .explanation strong { color: var(--text); }
+  .explanation .result-correct { color: var(--correct); font-weight: 700; }
+  .explanation .result-incorrect { color: var(--incorrect); font-weight: 700; }
+
+  .nav-buttons {
+    display: flex; gap: 10px; margin-top: 22px; align-items: center;
+  }
+  .nav-btn {
+    padding: 12px 24px; border: none; border-radius: 10px;
+    font-size: 0.95em; font-family: inherit; font-weight: 600;
+    cursor: pointer; transition: all 0.15s ease;
+  }
+  .nav-btn.primary {
+    background: var(--primary); color: #fff; box-shadow: 0 1px 3px rgba(37,99,235,0.3);
+  }
+  .nav-btn.primary:hover { background: var(--primary-dark); }
+  .nav-btn.secondary {
+    background: var(--card); color: var(--text-body);
+    border: 1.5px solid var(--border);
+  }
+  .nav-btn.secondary:hover { border-color: var(--border-strong); background: var(--card-hover); }
+  .nav-btn:disabled { opacity: 0.4; cursor: default; }
+  .nav-btn.hidden { display: none; }
+  .nav-spacer { flex: 1; }
+
+  /* ---------- Results Screen ---------- */
+  .results-screen { text-align: center; }
+  .results-hero {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 32px 24px;
+    box-shadow: var(--shadow); margin-bottom: 24px;
+  }
+  .results-hero h2 {
+    font-size: 1.5em; font-weight: 800; color: var(--text);
+    margin-bottom: 6px; letter-spacing: -0.02em;
+  }
+  .results-hero .mode-label { color: var(--text-dim); font-size: 0.9em; }
+  .score-circle {
+    width: 130px; height: 130px; border-radius: 50%; margin: 24px auto;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.4em; font-weight: 800; border: 4px solid;
+    letter-spacing: -0.03em;
+  }
+  .score-circle.high { border-color: var(--correct); color: var(--correct); background: var(--correct-light); }
+  .score-circle.mid  { border-color: var(--warn); color: var(--warn); background: var(--warn-light); }
+  .score-circle.low  { border-color: var(--incorrect); color: var(--incorrect); background: var(--incorrect-light); }
+  .results-hero .score-detail {
+    font-size: 1.15em; color: var(--text); font-weight: 600; margin-bottom: 4px;
+  }
+
+  .breakdown-card {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 22px 24px;
+    box-shadow: var(--shadow-sm); margin-bottom: 24px;
+  }
+  .breakdown-card h3 {
+    font-size: 1.05em; font-weight: 700; color: var(--text);
+    margin-bottom: 14px; letter-spacing: -0.01em;
+  }
+  .breakdown-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 0.92em;
+  }
+  .breakdown-row:last-child { border-bottom: none; }
+  .breakdown-row .cat { color: var(--text-body); }
+  .breakdown-row .score { font-weight: 700; font-size: 0.9em; }
+  .breakdown-row .score.all-correct { color: var(--correct); }
+  .breakdown-row .score.some-wrong { color: var(--warn); }
+  .breakdown-row .score.all-wrong { color: var(--incorrect); }
+  .breakdown-bar {
+    width: 80px; height: 6px; background: var(--bg-alt);
+    border-radius: 3px; overflow: hidden; margin-left: 10px;
+  }
+  .breakdown-bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+
+  .review-section { margin-top: 8px; text-align: left; }
+  .review-section h3 {
+    font-size: 1.05em; font-weight: 700; color: var(--text);
+    margin-bottom: 14px; letter-spacing: -0.01em;
+  }
+  .review-item {
+    padding: 16px 18px; margin-bottom: 10px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; border-left: 4px solid var(--incorrect);
+    box-shadow: var(--shadow-sm);
+  }
+  .review-item.correct { border-left-color: var(--correct); }
+  .review-item .q {
+    font-weight: 600; margin-bottom: 8px; color: var(--text);
+    font-size: 0.95em; line-height: 1.45;
+  }
+  .review-item .a { font-size: 0.88em; color: var(--text-dim); line-height: 1.55; }
+  .review-item .your-answer { color: var(--incorrect); font-weight: 600; }
+  .review-item .correct-answer { color: var(--correct); font-weight: 600; }
+  .review-item .explanation-text {
+    margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border);
+    color: var(--text-body); font-size: 0.86em;
+  }
+
+  .results-actions {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    margin-top: 28px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center; padding: 24px; color: var(--text-light);
+    font-size: 0.8em; line-height: 1.5;
+  }
+  .footer a { color: var(--primary); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    body { font-size: 15px; }
+    #app { padding: 20px 16px 50px; }
+    .start-hero { padding: 28px 20px; }
+    .start-hero h1 { font-size: 1.35em; }
+    .start-stats { gap: 18px; }
+    .question-text { font-size: 1.05em; }
+    .category-grid { grid-template-columns: 1fr; }
+    .mode-btn { padding: 16px 18px; }
+    .question-card { padding: 20px 18px; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="logo">🧬 SNP Quiz</span>
+    <span class="logo-sub">— Emunctorology & Pharmacogenomics</span>
+  </div>
+</div>
+
+<div id="app"></div>
+
+<div class="footer">
+  Educational tool for clinical pharmacogenomics and metabolic pathway study.
+  Not a substitute for professional medical advice.
+</div>
+
+<script>
+const QUIZ_DATA = {
+  "title": "Emunctorology & Pharmacogenomic SNP Master Quiz",
+  "subtitle": "72 clinical questions across 24 categories — Part 1: Emunctorology & Detox, Part 2: Clinical Pharmacogenomics & Metabolic Pathways",
+  "categories": [
+    {
+      "name": "DETOX PRIMING",
+      "emoji": "🧹",
+      "description": "GSTM1/GSTT1 null variants and glutathione conjugation"
+    },
+    {
+      "name": "METHYLATION",
+      "emoji": "🧬",
+      "description": "MTHFR variants and folate/homocysteine metabolism"
+    },
+    {
+      "name": "ONE-CARBON",
+      "emoji": "🔄",
+      "description": "MTR/MTRR and the methyl-folate trap"
+    },
+    {
+      "name": "GATEWAY",
+      "emoji": "🚪",
+      "description": "MDR1/P-glycoprotein and intestinal drug efflux"
+    },
+    {
+      "name": "LIVER PHASE I",
+      "emoji": "⚗️",
+      "description": "CYP450 oxidation and drug activation"
+    },
+    {
+      "name": "LIVER PHASE II",
+      "emoji": "🧪",
+      "description": "NAT2, UGT1A1, and conjugation pathways"
+    },
+    {
+      "name": "RENAL",
+      "emoji": "🫘",
+      "description": "ACE variants and fluid-electrolyte balance"
+    },
+    {
+      "name": "COLON",
+      "emoji": "🌾",
+      "description": "LPL, APOC3, APOE and lipid elimination"
+    },
+    {
+      "name": "SKIN/LUNGS",
+      "emoji": "🫁",
+      "description": "COMT, G6PD and secondary emunctories"
+    },
+    {
+      "name": "ARCHETYPES",
+      "emoji": "👥",
+      "description": "Explorer, Warrior, Gatherer metabolic genotypes"
+    },
+    {
+      "name": "MITOCHONDRIA",
+      "emoji": "⚡",
+      "description": "PPAR-γ, ATP and fatty acid oxidation"
+    },
+    {
+      "name": "SENSITIVITY",
+      "emoji": "⚠️",
+      "description": "Herxheimer reactions and detox safety"
+    },
+    {
+      "name": "CRITICAL PGx",
+      "emoji": "🚨",
+      "description": "DPYD, TPMT, HLA-B*57:01 — life-or-death pharmacogenomics"
+    },
+    {
+      "name": "ANTIPLATELET PGx",
+      "emoji": "🩸",
+      "description": "CYP2C19 and clopidogrel activation"
+    },
+    {
+      "name": "WARFARIN DOSING",
+      "emoji": "💊",
+      "description": "CYP2C9, VKORC1, CYP4F2 and anticoagulation"
+    },
+    {
+      "name": "STATIN SAFETY",
+      "emoji": "💪",
+      "description": "SLCO1B1, HMGCR and myopathy risk"
+    },
+    {
+      "name": "UREA CYCLE",
+      "emoji": "🧪",
+      "description": "OTC, NAGS and hyperammonemia"
+    },
+    {
+      "name": "ANTIOXIDANT ENZYMES",
+      "emoji": "🛡️",
+      "description": "SOD2, GPX1, NQO1 and oxidative defense"
+    },
+    {
+      "name": "OXALATE METABOLISM",
+      "emoji": "💎",
+      "description": "AGXT, kidney stones and nutritional modulators"
+    },
+    {
+      "name": "VITAMIN D PROCESSING",
+      "emoji": "☀️",
+      "description": "VDR, GC, CYP2R1 and bioavailable D"
+    },
+    {
+      "name": "NEUROTRANSMITTERS",
+      "emoji": "🧠",
+      "description": "MAOA, TPH2, SERT and serotonin/dopamine"
+    },
+    {
+      "name": "HEME & PORPHYRIA",
+      "emoji": "🔴",
+      "description": "HMBS, AIP triggers and safe drugs"
+    },
+    {
+      "name": "FATTY ACID OXIDATION",
+      "emoji": "🔥",
+      "description": "MCAD, CPT2, carnitine and riboflavin"
+    },
+    {
+      "name": "LYSOSOMAL DISORDERS",
+      "emoji": "📦",
+      "description": "Gaucher, Fabry, Pompe and ERT"
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "category": "DETOX PRIMING",
+      "question": "A patient is GSTM1 Null and GSTT1 Null. What is the primary clinical risk?",
+      "options": [
+        "Overproduction of glutathione",
+        "Inability to conjugate environmental carcinogens effectively",
+        "Impaired vitamin K recycling",
+        "Rapid drug metabolism"
+      ],
+      "correct": 1,
+      "explanation": "GSTM1 and GSTT1 null deletions mean no functional glutathione S-transferase enzyme. The patient cannot effectively conjugate (neutralize) environmental carcinogens and xenobiotics via glutathione conjugation — a critical Phase II detox pathway.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5738617/",
+      "ref_source": "PMC — GSTT1 and GSTM1 null variants"
+    },
+    {
+      "id": 2,
+      "category": "DETOX PRIMING",
+      "question": "Which micronutrient is most critical for supporting the function of GST enzymes?",
+      "options": [
+        "B12",
+        "Calcium",
+        "Vitamin K2",
+        "Selenium"
+      ],
+      "correct": 3,
+      "explanation": "Selenium is essential for glutathione peroxidase (GPX) and related GST enzyme function. Without adequate selenium, the glutathione system cannot operate efficiently. NAC and Vitamin C are also listed as cofactor support for GST null individuals.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4210904/",
+      "ref_source": "Selenium-Enriched Foods Are More Effective at Increasing ..."
+    },
+    {
+      "id": 3,
+      "category": "DETOX PRIMING",
+      "question": "Why do we 'prime' the GST system before starting aggressive emunctorology?",
+      "options": [
+        "To prevent the accumulation of reactive intermediates during mobilization",
+        "To inhibit Phase I oxidation",
+        "To clear the colon of all bacteria",
+        "To increase blood pressure"
+      ],
+      "correct": 0,
+      "explanation": "If you mobilize toxins faster than Phase II can conjugate them, reactive intermediates accumulate and cause oxidative damage. Priming ensures the glutathione buffer is adequate before increasing the toxin load.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3395771/",
+      "ref_source": "PMC — GST polymorphisms and chemotherapy"
+    },
+    {
+      "id": 4,
+      "category": "METHYLATION",
+      "question": "Which variant is most closely associated with elevated homocysteine and a need for 5-MTHF?",
+      "options": [
+        "MTHFR C677T",
+        "APOE ε4",
+        "CYP2D6 *4",
+        "NAT2 *5"
+      ],
+      "correct": 0,
+      "explanation": "MTHFR C677T (rs1801133) produces a thermolabile enzyme with ~70% reduced activity in TT homozygotes. This directly elevates homocysteine and impairs folate metabolism. Treatment: L-Methylfolate (5-MTHF), B12, B6, and Riboflavin (B2).",
+      "reference": "https://www.pharmgkb.org/clinicalAnnotations/PA166157061",
+      "ref_source": "PharmGKB — MTHFR C677T and homocysteine"
+    },
+    {
+      "id": 5,
+      "category": "METHYLATION",
+      "question": "If a patient has an MTRR variant, which cofactor is essential to ensure MTR can continue to function?",
+      "options": [
+        "Methylcobalamin (B12)",
+        "L-Carnitine",
+        "Zinc",
+        "Vitamin C"
+      ],
+      "correct": 0,
+      "explanation": "MTRR (methionine synthase reductase) reactivates MTR (methionine synthase), which is B12-dependent. An MTRR variant causes functional B12 deficiency. Methylcobalamin (B12) is the required cofactor to keep the MTR enzyme functional.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11930790/",
+      "ref_source": "PMC — Folic acid and MTHFR C677T"
+    },
+    {
+      "id": 6,
+      "category": "ONE-CARBON",
+      "question": "What is the 'Methyl Trap' in the context of the one-carbon cycle?",
+      "options": [
+        "A state where folate is stuck as 5-MTHF because B12/MTR is deficient",
+        "The inability to produce homocysteine",
+        "Excess methylation of the MTHFR gene",
+        "Trapping folate in the liver"
+      ],
+      "correct": 0,
+      "explanation": "When B12 or MTR is non-functional, 5-methyl-THF cannot donate its methyl group to homocysteine (to form methionine). Folate becomes trapped in the 5-MTHF form, creating a functional folate deficiency despite adequate folate intake.",
+      "reference": "https://www.clinpgx.org/gene/PA245",
+      "ref_source": "MTHFR - ClinPGx"
+    },
+    {
+      "id": 7,
+      "category": "GATEWAY",
+      "question": "A patient carries a SNP in the MDR1 (ABCB1) gene that reduces P-glycoprotein (P-gp) production. What is the most likely clinical outcome?",
+      "options": [
+        "Complete immunity to all antibiotics",
+        "Sustained higher drug levels in the bloodstream due to reduced efflux",
+        "Drugs are excreted from the body too quickly",
+        "Increased absorption of dietary lipids"
+      ],
+      "correct": 1,
+      "explanation": "P-glycoprotein is an efflux pump that pushes drugs and toxins back into the intestinal lumen. Reduced P-gp function means less drug efflux, leading to higher and more sustained drug levels in the bloodstream (e.g., digoxin accumulation).",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12389356/",
+      "ref_source": "Synergistic Effects of MTHFR, MTRR, and MTR Gene Variants ..."
+    },
+    {
+      "id": 8,
+      "category": "GATEWAY",
+      "question": "Which natural compound is noted for its ability to modulate P-gp activity?",
+      "options": [
+        "Curcumin",
+        "Omega-3",
+        "Vitamin K2",
+        "Magnesium"
+      ],
+      "correct": 0,
+      "explanation": "Curcumin is documented as a P-glycoprotein modulator (per CLINICALLY-RANKED-SNPs.md). It can alter P-gp activity, which is clinically relevant when considering drug-herb interactions with P-gp substrate medications.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 9,
+      "category": "GATEWAY",
+      "question": "Why is the MDR1 status critical before administering high-dose chemotherapy or digoxin?",
+      "options": [
+        "To prevent kidney failure",
+        "To increase the speed of drug activation",
+        "To avoid potential toxicity due to impaired cellular excretion of the drug",
+        "To ensure the drug stays in the gut without crossing into the blood"
+      ],
+      "correct": 2,
+      "explanation": "Many chemotherapy agents and digoxin are P-gp substrates. If P-gp is reduced, the body cannot efficiently excrete these drugs, leading to dangerous accumulation and toxicity. MDR1 genotyping helps determine safe dosing.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 10,
+      "category": "LIVER PHASE I",
+      "question": "A 'Poor Metabolizer' (PM) for CYP2D6 will experience what effect when taking codeine?",
+      "options": [
+        "Rapid excretion of the drug via the kidneys",
+        "Enhanced euphoric response",
+        "Severe toxicity due to overdose",
+        "No analgesic effect because codeine cannot be converted to morphine"
+      ],
+      "correct": 3,
+      "explanation": "Codeine is a prodrug that requires CYP2D6 to convert it to morphine (the active analgesic). Poor metabolizers (e.g., *3, *4, *5 alleles) produce little or no functional CYP2D6, so codeine provides no pain relief. CPIC recommends avoiding codeine in CYP2D6 PMs.",
+      "reference": "https://www.pharmgkb.org/hgnc/ABCB1",
+      "ref_source": "PharmGKB — ABCB1 (MDR1)"
+    },
+    {
+      "id": 11,
+      "category": "LIVER PHASE I",
+      "question": "What is the primary danger of a 'fast' Phase I system paired with a 'slow' Phase II system?",
+      "options": [
+        "The patient becomes an ultra-rapid acetylator",
+        "Reactive intermediates accumulate, causing cellular damage (oxidative stress)",
+        "Drug levels remain too low to be effective",
+        "The body produces too many antioxidants"
+      ],
+      "correct": 1,
+      "explanation": "Phase I (CYP450) oxidizes toxins into reactive intermediates, which Phase II then conjugates for excretion. If Phase I is fast but Phase II is slow (e.g., GST null), the reactive intermediates accumulate faster than they can be neutralized, causing oxidative tissue damage.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5198046/",
+      "ref_source": "Curcumin as a Modulator of P-Glycoprotein in Cancer - PMC - NIH"
+    },
+    {
+      "id": 12,
+      "category": "LIVER PHASE I",
+      "question": "Which of these is a common way to 'induce' or accelerate CYP1A2 activity?",
+      "options": [
+        "Sleep deprivation",
+        "High-dose Calcium",
+        "Smoking (tobacco)",
+        "Fasting"
+      ],
+      "correct": 2,
+      "explanation": "Tobacco smoking is a well-documented inducer of CYP1A2. This means smokers metabolize CYP1A2 substrates (caffeine, clozapine, theophylline) faster, often requiring dose adjustments. The CYP1A2 *1F variant is also associated with faster metabolism.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4600488/",
+      "ref_source": "Bypassing P-Glycoprotein Drug Efflux Mechanisms - PMC - NIH"
+    },
+    {
+      "id": 13,
+      "category": "LIVER PHASE II",
+      "question": "A 'Slow Acetylator' (NAT2 variant) is at a higher risk for which of the following when taking isoniazid?",
+      "options": [
+        "Vitamin K deficiency",
+        "Peripheral neuropathy and hepatotoxicity",
+        "Rapid drug clearance",
+        "Excessive sleepiness"
+      ],
+      "correct": 1,
+      "explanation": "NAT2 slow acetylators (*5, *6, *7 alleles) cannot efficiently acetylate isoniazid, leading to drug accumulation. This causes peripheral neuropathy (B6-responsive) and hepatotoxicity. CPIC recommends adding pyridoxine (B6) and monitoring liver enzymes.",
+      "reference": "https://cpicpgx.org/guidelines/guideline-for-codeine-and-cyp2d6/",
+      "ref_source": "CPIC — CYP2D6 and Codeine Guideline"
+    },
+    {
+      "id": 14,
+      "category": "LIVER PHASE II",
+      "question": "UGT1A1 *28 is associated with Gilbert's Syndrome. What is the primary metabolic consequence?",
+      "options": [
+        "Overproduction of glucose",
+        "Rapid elimination of water-soluble toxins",
+        "Reduced glucuronidation of bilirubin and certain drugs (e.g., Irinotecan)",
+        "Inability to process fats"
+      ],
+      "correct": 2,
+      "explanation": "UGT1A1 *28 (TA7 promoter variant) reduces bilirubin glucuronidation, causing mild unconjugated hyperbilirubinemia (Gilbert's syndrome). Clinically critical for irinotecan chemotherapy — reduced UGT1A1 activity causes severe neutropenia and diarrhea, requiring dose reduction.",
+      "reference": "https://www.clinpgx.org/drug/PA449088/guidelineAnnotation/PA166104996",
+      "ref_source": "ClinPGx — Codeine CYP2D6 ultrarapid/poor"
+    },
+    {
+      "id": 15,
+      "category": "LIVER PHASE II",
+      "question": "Which cofactor is specifically emphasized for those with NAT2 slow acetylator status to mitigate neuropathy?",
+      "options": [
+        "Vitamin A",
+        "Vitamin B6 (Pyridoxine)",
+        "Zinc",
+        "Vitamin E"
+      ],
+      "correct": 1,
+      "explanation": "Pyridoxine (B6) is the specific cofactor recommended for NAT2 slow acetylators taking isoniazid. Isoniazid depletes B6, and slow acetylators accumulate more drug, increasing neuropathy risk. B6 supplementation prevents and treats this complication.",
+      "reference": "https://www.fda.gov/medical-devices/precision-medicine/table-pharmacogenetic-associations",
+      "ref_source": "FDA — Table of Pharmacogenetic Associations"
+    },
+    {
+      "id": 16,
+      "category": "RENAL",
+      "question": "The ACE (Angiotensin-Converting Enzyme) SNP is primarily used to assess a patient's predisposition to what?",
+      "options": [
+        "Skin permeability",
+        "Liver cirrhosis",
+        "Glucose metabolism",
+        "Blood pressure regulation and fluid-electrolyte balance"
+      ],
+      "correct": 3,
+      "explanation": "ACE (rs461331) is part of the renin-angiotensin system, which regulates blood pressure and fluid-electrolyte balance. Variants can predispose to elevated blood pressure and fluid retention. Support: Magnesium, Potassium, CoQ10.",
+      "reference": "https://www.clinpgx.org/summaryAnnotation/1451241420",
+      "ref_source": "Drug-induced liver injury, Toxic liver disease and Tuberculosis (level 1B ..."
+    },
+    {
+      "id": 17,
+      "category": "RENAL",
+      "question": "Which mineral combination is prioritized to support renal function and balance the effects of high-ACE activity?",
+      "options": [
+        "Magnesium and Potassium",
+        "Zinc and Selenium",
+        "Iron and Copper",
+        "Calcium and Phosphorus"
+      ],
+      "correct": 0,
+      "explanation": "Magnesium and Potassium are the primary cofactors listed for ACE variant support. Magnesium relaxes vascular smooth muscle (antihypertensive), and potassium balances fluid-electrolyte dynamics. CoQ10 is also listed for cardiovascular support.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9014426/",
+      "ref_source": "All You Need to Know About UGT1A1 Genetic Testing for Patients Treated ..."
+    },
+    {
+      "id": 18,
+      "category": "RENAL",
+      "question": "In an 'Emunctorology' context, how does renal stress affect other organs?",
+      "options": [
+        "It can lead to a backup of toxins that forces a shift toward skin/lung elimination (secondary emunctories)",
+        "It has no impact on other emunctories",
+        "It increases skin elasticity",
+        "It accelerates liver Phase I oxidation"
+      ],
+      "correct": 0,
+      "explanation": "When the kidneys (primary emunctory) are compromised, toxins back up and the body compensates by shifting elimination to secondary emunctories — the skin and lungs. This often manifests as rashes, sweating, or respiratory symptoms.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4091838/",
+      "ref_source": "very important pharmacogene information for UGT1A1 - PMC"
+    },
+    {
+      "id": 19,
+      "category": "COLON",
+      "question": "A patient with a 'Thrifty' profile exhibits poor LPL (Lipoprotein Lipase) function. This typically manifests as:",
+      "options": [
+        "Hyper-efficiency in burning fats",
+        "Rapid weight loss",
+        "Impaired triglyceride clearance and higher obesity risk",
+        "Low cholesterol levels"
+      ],
+      "correct": 2,
+      "explanation": "LPL (rs1800001) variants reduce triglyceride clearance from the blood, leading to hypertriglyceridemia, obesity risk, and pancreatitis risk. Support: Omega-3 fatty acids (DHA/EPA) and L-Carnitine to support fatty acid oxidation.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10862427/",
+      "ref_source": "PMC — ACE I/D polymorphism and blood pressure"
+    },
+    {
+      "id": 20,
+      "category": "COLON",
+      "question": "Which of the following is the primary 'actionable' support for a patient with APOC3-driven hypertriglyceridemia?",
+      "options": [
+        "High-dose Vitamin K",
+        "Omega-3 fatty acids (DHA/EPA)",
+        "Pure glucose supplements",
+        "Calcium carbonate"
+      ],
+      "correct": 1,
+      "explanation": "APOC3 (rs12248560) variants increase triglyceride catabolism impairment. Omega-3 fatty acids (DHA/EPA) are the primary support listed, along with B-complex vitamins. Omega-3s help lower triglycerides and support cardiovascular health.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 21,
+      "category": "COLON",
+      "question": "The APOE ε4 variant is linked to which metabolic risk?",
+      "options": [
+        "Inability to digest lactose",
+        "Rapid elimination of fat-soluble vitamins",
+        "Excessive bile production",
+        "Altered lipid transport and increased Alzheimer's risk"
+      ],
+      "correct": 3,
+      "explanation": "APOE ε4 carriers (10-15% of population) have 3-15x increased Alzheimer's risk, altered lipid transport, and reduced statin response. Support: Omega-3 (DHA/EPA), low saturated fat diet. The ε4 allele affects lipid metabolism in both brain and cardiovascular system.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK1308/",
+      "ref_source": "GeneReviews — Lipoprotein Lipase Deficiency"
+    },
+    {
+      "id": 22,
+      "category": "SKIN/LUNGS",
+      "question": "The COMT Val158Met SNP affects the clearance of which chemicals, often relating to mood and skin 'congestion'?",
+      "options": [
+        "Triglycerides and Cholesterol",
+        "Glucagon and Insulin",
+        "Urea and Creatinine",
+        "Dopamine and Estrogens"
+      ],
+      "correct": 3,
+      "explanation": "COMT (Val158Met, rs4680) methylates catecholamines (dopamine, norepinephrine, epinephrine) and catechol estrogens. Met/Met = low activity → higher dopamine, pain sensitivity, altered estrogen metabolism. Cofactors: SAM, Magnesium, Vitamin C.",
+      "reference": "https://omim.org/entry/107720?search=prefix%3A%20%2520AND%2520chromosome%3AM",
+      "ref_source": "Entry - *107720 - APOLIPOPROTEIN C-III; APOC3"
+    },
+    {
+      "id": 23,
+      "category": "SKIN/LUNGS",
+      "question": "A patient with G6PD deficiency should avoid 'oxidant' drugs to prevent what?",
+      "options": [
+        "Hemolytic anemia",
+        "Hypertension",
+        "Rapid weight gain",
+        "Liver failure"
+      ],
+      "correct": 0,
+      "explanation": "G6PD deficiency (X-linked) means red blood cells cannot produce adequate NADPH to maintain glutathione in reduced form. Oxidant drugs (primaquine, dapsone, rasburicase) or foods (fava beans) trigger oxidative hemolysis. Classified as CPIC Tier 2 — contraindicate oxidant drugs.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 24,
+      "category": "SKIN/LUNGS",
+      "question": "Why is the 'secondary emunctory' (skin/lungs) critical when the liver and kidneys are compromised?",
+      "options": [
+        "They do not require cofactors",
+        "They only operate during sleep",
+        "They are more efficient than the liver",
+        "They act as a 'fail-safe' for toxin elimination, though this often manifests as rashes or respiratory issues"
+      ],
+      "correct": 3,
+      "explanation": "When primary emunctories (liver, kidneys) are overloaded or genetically compromised, the body routes toxins through secondary emunctories (skin, lungs). This compensatory mechanism is less efficient and often presents clinically as rashes, acne, or respiratory symptoms.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 25,
+      "category": "ARCHETYPES",
+      "question": "The 'Explorer' genotype is characterized by a high prevalence of which genetic trait?",
+      "options": [
+        "High LPL efficiency",
+        "Ultra-rapid Acetylation",
+        "GSTM1/GSTT1 Null alleles (Slow detox buffers)",
+        "Low susceptibility to chemical sensitivity"
+      ],
+      "correct": 2,
+      "explanation": "The Explorer archetype (from the D'Adamo framework) is strongly associated with GSTM1/GSTT1 null alleles, giving them lower Phase II detoxification buffers and higher chemical sensitivity. This requires careful, gradual detox protocols.",
+      "reference": "https://www.clinpgx.org/guideline/PA166251450",
+      "ref_source": "CPIC — G6PD Genotype and Medication Use"
+    },
+    {
+      "id": 26,
+      "category": "ARCHETYPES",
+      "question": "'Gatherers' and 'Warriors' are considered 'Thrifty' genotypes. What is their primary metabolic hallmark?",
+      "options": [
+        "Efficient energy storage but a tendency toward Advanced Glycation Endproducts (AGEs)",
+        "High resistance to insulin",
+        "Inability to store fat",
+        "Rapid clearance of all sugars"
+      ],
+      "correct": 0,
+      "explanation": "Thrifty genotypes (Gatherer, Warrior) are metabolically efficient at storing energy — an advantage in scarcity but a liability in modern environments. They tend toward AGEs (Advanced Glycation Endproducts), linking to diabesity and cardiovascular risk. LPL and PPAR variants are common.",
+      "reference": "https://omim.org/entry/104310",
+      "ref_source": "OMIM — Alzheimer Disease 2 (APOE4-associated)"
+    },
+    {
+      "id": 27,
+      "category": "ARCHETYPES",
+      "question": "When tailoring a detox protocol, why do you treat a 'Warrior' differently than an 'Explorer'?",
+      "options": [
+        "Explorers are immune to Herxheimer reactions",
+        "Warriors cannot process omega-3s",
+        "Explorers have higher chemical sensitivity and lower detoxification buffers",
+        "Warriors have no liver"
+      ],
+      "correct": 2,
+      "explanation": "Explorers typically carry GSTM1/GSTT1 null alleles, giving them lower glutathione conjugation capacity. They need slower, more carefully primed detox protocols. Warriors (Thrifty type) have different metabolic concerns (AGEs, lipid metabolism) and can often tolerate more aggressive protocols.",
+      "reference": "https://dadamo.com/txt/index.pl?1036",
+      "ref_source": "D'Adamo — The Explorer Epi-Genotype"
+    },
+    {
+      "id": 28,
+      "category": "MITOCHONDRIA",
+      "question": "Why is cellular energy (ATP) critical for the emunctories to function?",
+      "options": [
+        "The transport of toxins across membranes (active transport) requires significant energy",
+        "Energy is only needed for the lungs",
+        "It is not; detox is a passive process",
+        "ATP inhibits the CYP450 system"
+      ],
+      "correct": 0,
+      "explanation": "Many detoxification transporters (P-gp, BSEP, MRP2) are ATP-dependent active transporters. Without adequate ATP, the emunctories cannot move toxins across cell membranes for excretion. Mitochondrial dysfunction directly impairs detoxification capacity.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 29,
+      "category": "MITOCHONDRIA",
+      "question": "Which cofactor is specifically linked to PPAR-gamma activity for optimizing fatty acid oxidation?",
+      "options": [
+        "Folate",
+        "Chromium and Alpha-Lipoic Acid",
+        "Vitamin K1",
+        "Calcium"
+      ],
+      "correct": 1,
+      "explanation": "PPAR-γ (rs1801282) variants affect fatty acid oxidation and insulin sensitivity. The cofactors listed are Chromium, Zinc, and Alpha-Lipoic Acid. Chromium supports glucose tolerance factor, and Alpha-Lipoic Acid is a mitochondrial antioxidant that supports energy metabolism.",
+      "reference": "https://www.nccih.nih.gov/health/providers/digest/type-2-diabetes-and-dietary-supplements-science",
+      "ref_source": "NCCIH — Type 2 Diabetes and Dietary Supplements"
+    },
+    {
+      "id": 30,
+      "category": "MITOCHONDRIA",
+      "question": "What is the risk of initiating aggressive detox in a patient with severe mitochondrial dysfunction?",
+      "options": [
+        "They will lose weight too quickly",
+        "They may experience a severe 'crash' or systemic failure because they cannot power the elimination process",
+        "They will become ultra-rapid acetylators",
+        "They will stop needing cofactors"
+      ],
+      "correct": 1,
+      "explanation": "Detoxification requires ATP for active transport of toxins across membranes. If mitochondria are severely dysfunctional, the patient cannot generate enough energy to power elimination. Aggressive detox in this context can cause systemic collapse — always assess mitochondrial capacity first.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3325335/",
+      "ref_source": "PMC — G6PD, NADPH, and Cell Survival"
+    },
+    {
+      "id": 31,
+      "category": "SENSITIVITY",
+      "question": "What is the physiological cause of a 'Healing Crisis' (Herxheimer reaction)?",
+      "options": [
+        "An allergic reaction to a supplement",
+        "A sudden lack of vitamins",
+        "The complete shutdown of the liver",
+        "Mobilization of toxins into the blood faster than the emunctories can clear them"
+      ],
+      "correct": 3,
+      "explanation": "A Herxheimer reaction occurs when detox mobilizes toxins (e.g., from fat stores or biofilms) into the bloodstream faster than the emunctories can excrete them. The resulting toxin surge causes flu-like symptoms: headache, fatigue, rash, fever.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK557820/",
+      "ref_source": "StatPearls — Jarisch-Herxheimer Reaction"
+    },
+    {
+      "id": 32,
+      "category": "SENSITIVITY",
+      "question": "Based on SNP data, who is at the Highest risk for a severe Herxheimer reaction?",
+      "options": [
+        "Ultra-rapid acetylators with present GSTM1",
+        "Individuals with the 'Nomad' genotype",
+        "Patients with high LPL efficiency",
+        "Slow acetylators (NAT2) with GSTM1/GSTT1 Null alleles"
+      ],
+      "correct": 3,
+      "explanation": "The worst Herxheimer risk is when BOTH Phase II pathways are compromised: NAT2 slow acetylation (impaired conjugation) AND GSTM1/GSTT1 null (impaired glutathione conjugation). These patients cannot clear mobilized toxins through either major Phase II route.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1459966/",
+      "ref_source": "PMC — NAT2 slow acetylation and GSTM1 null"
+    },
+    {
+      "id": 33,
+      "category": "SENSITIVITY",
+      "question": "What is the primary clinical intervention to resolve a Herxheimer reaction?",
+      "options": [
+        "Increasing the dose of the mobilizing agent",
+        "Slowing the mobilization and increasing emunctory support (hydration, sauna, binders)",
+        "Stopping all water intake",
+        "Forcing the patient to exercise intensely"
+      ],
+      "correct": 1,
+      "explanation": "The correct response is to SLOW DOWN: reduce or pause the mobilizing agent, and increase emunctory support — hydration, sauna (skin elimination), binders (charcoal/zeolite to trap toxins in gut), and cofactor support. Pushing harder worsens the reaction.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7217398/",
+      "ref_source": "PMC — Emunctorology: Naturopathic Practice and Modern Science"
+    },
+    {
+      "id": 34,
+      "category": "DETOX PRIMING",
+      "question": "When creating a 'Custom Elimination Calendar,' which phase must always come first?",
+      "options": [
+        "Priming the buffers (GSTs, Methylation)",
+        "Infrared sauna",
+        "Aggressive Chelation",
+        "High-dose L-Carnitine"
+      ],
+      "correct": 0,
+      "explanation": "Priming the detoxification buffers (glutathione system, methylation cycle) must always precede any aggressive mobilization. Without adequate Phase II capacity, mobilizing toxins creates reactive intermediates that cause more harm than the original toxin burden.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK599521/",
+      "ref_source": "StatPearls — Adverse Drug Reactions"
+    },
+    {
+      "id": 35,
+      "category": "DETOX PRIMING",
+      "question": "A patient has MTHFR C677T, NAT2 Slow, and GSTM1 Null. What is the 'critical path' for their detox?",
+      "options": [
+        "Priming Methylation → Supporting Phase II → Slow Mobilization",
+        "Immediate high-dose Vitamin C → Fasting → Rapid detox",
+        "Clear lipids → Clear kidneys → Clear liver",
+        "Only support the skin and lungs"
+      ],
+      "correct": 0,
+      "explanation": "This patient has triple vulnerability: impaired methylation (MTHFR), impaired acetylation (NAT2), and impaired glutathione conjugation (GSTM1 null). The critical path: (1) Prime methylation with 5-MTHF/B12, (2) Support Phase II with NAC/Selenium/B6, (3) Only then begin very slow, low-dose mobilization.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 36,
+      "category": "SENSITIVITY",
+      "question": "What is the ultimate goal of Applied Emunctorology?",
+      "options": [
+        "To optimize the innate biological pathways of elimination based on genetic capacity",
+        "To eliminate the need for the kidneys",
+        "To make everyone a 'Warrior' genotype",
+        "To replace the liver with supplements"
+      ],
+      "correct": 0,
+      "explanation": "Applied Emunctorology uses pharmacogenomic data to understand each patient's unique elimination capacity. The goal is NOT to bypass organs with supplements, but to optimize the innate biological pathways (Phase I/II, renal, skin/lung) by providing the precise cofactors each individual's genetics require.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 37,
+      "category": "CRITICAL PGx",
+      "question": "A patient tests positive for DPYD *2A (rs3918290). What is the clinical action before prescribing 5-FU or capecitabine?",
+      "options": [
+        "Standard dosing with folinic acid rescue",
+        "Contraindicate fluoropyrimidines — risk of fatal neutropenia, mucositis, and diarrhea",
+        "Double the dose to overcome enzyme deficiency",
+        "Reduce dose by 10% and monitor CBC weekly"
+      ],
+      "correct": 1,
+      "explanation": "DPYD *2A (IVS14+1G>A) causes complete enzyme deficiency. Administering 5-FU or capecitabine to carriers can cause fatal neutropenia, mucositis, and diarrhea. CPIC Level 1A guidelines recommend contraindication — the strongest possible action. This is ranked #1 in clinical stakes among all pharmacogenomic variants.",
+      "reference": "https://www.clinpgx.org/guideline/PA166251462",
+      "ref_source": "CPIC — DPYD Genotype and Fluoropyrimidine Dosing"
+    },
+    {
+      "id": 38,
+      "category": "CRITICAL PGx",
+      "question": "Standard thiopurine (6-MP, azathioprine) dosing in a TPMT *3A homozygous patient causes what consequence?",
+      "options": [
+        "Fatal bone marrow suppression (myelosuppression)",
+        "Mild gastrointestinal upset only",
+        "Rapid drug clearance requiring higher doses",
+        "Enhanced therapeutic efficacy with no side effects"
+      ],
+      "correct": 0,
+      "explanation": "TPMT *3A (rs1800460+rs1142345) produces no functional enzyme. Standard thiopurine dosing causes accumulation of toxic metabolites leading to fatal myelosuppression. CPIC recommends mandatory pre-prescription testing and extreme dose reduction (10%) or complete avoidance for TPMT poor metabolizers.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK100661/",
+      "ref_source": "NCBI Bookshelf — Azathioprine and TPMT/NUDT15 Genotype"
+    },
+    {
+      "id": 39,
+      "category": "CRITICAL PGx",
+      "question": "HLA-B*57:01 positivity means a patient must never receive which drug?",
+      "options": [
+        "Abacavir — risk of fatal hypersensitivity reaction",
+        "Statin therapy — risk of rhabdomyolysis",
+        "Warfarin — risk of skin necrosis",
+        "Clopidogrel — risk of bleeding"
+      ],
+      "correct": 0,
+      "explanation": "HLA-B*57:01 has 100% specificity for immunologically confirmed abacavir hypersensitivity. The FDA requires mandatory testing before abacavir initiation (black box warning). Positive carriers must never receive abacavir — the hypersensitivity reaction can be fatal upon re-exposure.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK315783/",
+      "ref_source": "NCBI Bookshelf — Abacavir and HLA-B*57:01 Genotype"
+    },
+    {
+      "id": 40,
+      "category": "ANTIPLATELET PGx",
+      "question": "A patient who is CYP2C19 *2/*2 (poor metabolizer) is prescribed clopidogrel after cardiac stenting. What is the clinical risk?",
+      "options": [
+        "Excessive bleeding from over-activation",
+        "No activation to active drug → increased cardiovascular events",
+        "Rapid clearance requiring dose escalation",
+        "Immediate allergic reaction to clopidogrel"
+      ],
+      "correct": 1,
+      "explanation": "Clopidogrel is a prodrug requiring CYP2C19 activation. *2 (rs4244285) and *3 (rs4986893) produce no functional enzyme, so clopidogrel cannot be converted to its active form. Poor metabolizers have significantly increased cardiovascular events post-PCI. CPIC recommends prasugrel or ticagrelor instead.",
+      "reference": "https://www.clinpgx.org/guideline/PA166251443",
+      "ref_source": "CPIC — CYP2C19 and Clopidogrel Therapy (2022)"
+    },
+    {
+      "id": 41,
+      "category": "ANTIPLATELET PGx",
+      "question": "CYP2C19 *17 (rs12248560) ultra-rapid metabolizers taking clopidogrel should be managed how?",
+      "options": [
+        "Contraindicate clopidogrel entirely",
+        "Standard clopidogrel dosing is acceptable; consider PPI alternatives if needed",
+        "Switch immediately to prasugrel",
+        "Reduce clopidogrel dose by 50%"
+      ],
+      "correct": 1,
+      "explanation": "CYP2C19 *17 causes ultra-rapid metabolism. For clopidogrel this means enhanced activation — standard dosing works well. However, *17 also affects PPI (proton pump inhibitor) metabolism, potentially reducing PPI efficacy. Consider alternative acid suppression if needed.",
+      "reference": "https://www.clinpgx.org/guideline/PA166251443",
+      "ref_source": "CPIC — CYP2C19 and Clopidogrel Therapy (2022)"
+    },
+    {
+      "id": 42,
+      "category": "ANTIPLATELET PGx",
+      "question": "Which alternative antiplatelet does CPIC recommend for CYP2C19 poor metabolizers post-PCI?",
+      "options": [
+        "Aspirin monotherapy only",
+        "Warfarin with INR monitoring",
+        "High-dose clopidogrel (double dose)",
+        "Prasugrel or ticagrelor (not dependent on CYP2C19 activation)"
+      ],
+      "correct": 3,
+      "explanation": "Prasugrel and ticagrelor do not require CYP2C19 for activation, making them effective regardless of CYP2C19 phenotype. CPIC Level 1A guidelines recommend these alternatives for CYP2C19 poor metabolizers (*2/*2, *2/*3, *3/*3) after percutaneous coronary intervention (PCI).",
+      "reference": "https://www.clinpgx.org/guideline/PA166251443",
+      "ref_source": "CPIC — CYP2C19 and Clopidogrel Therapy (2022)"
+    },
+    {
+      "id": 43,
+      "category": "WARFARIN DOSING",
+      "question": "A patient has CYP2C9 *2/*3. How should warfarin dosing be adjusted?",
+      "options": [
+        "No dose adjustment — monitor INR only",
+        "Reduce dose 30-50% due to markedly reduced clearance",
+        "Increase dose 50% to overcome resistance",
+        "Switch to aspirin since warfarin is contraindicated"
+      ],
+      "correct": 1,
+      "explanation": "CYP2C9 *2 (rs1799853) reduces clearance by ~20-40%; *3 (rs1057910) reduces clearance by ~30-50%. Combined *2/*3 requires significant dose reduction. CPIC recommends combined CYP2C9/VKORC1 genotyping to individualize warfarin dosing, reducing bleeding events and improving time to therapeutic INR.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3187550/",
+      "ref_source": "CPIC — CYP2C9 and VKORC1 Warfarin Dosing"
+    },
+    {
+      "id": 44,
+      "category": "WARFARIN DOSING",
+      "question": "VKORC1 (rs9923231, -1639G>A) variant increases warfarin sensitivity. What does this mean for dosing?",
+      "options": [
+        "Patient needs higher warfarin doses for efficacy",
+        "Only monitoring frequency changes, not dose",
+        "Warfarin is completely contraindicated",
+        "Patient needs 20-40% less warfarin to achieve therapeutic INR"
+      ],
+      "correct": 3,
+      "explanation": "VKORC1 -1639G>A increases warfarin sensitivity at the pharmacodynamic target (vitamin K epoxide reductase). Carriers need 20-40% less warfarin. Combined with CYP2C9 genotyping, this accounts for ~30-40% of warfarin dose variability — far more useful than empirical dosing.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3187550/",
+      "ref_source": "CPIC — CYP2C9 and VKORC1 Warfarin Dosing"
+    },
+    {
+      "id": 45,
+      "category": "WARFARIN DOSING",
+      "question": "CYP4F2 (rs2108622) affects warfarin therapy through what mechanism?",
+      "options": [
+        "Directly inhibits CYP2C9 metabolism of warfarin",
+        "Reduced vitamin K clearance → relatively higher vitamin K levels → warfarin sensitivity modifier",
+        "Accelerates warfarin elimination via the kidneys",
+        "Blocks intestinal absorption of vitamin K"
+      ],
+      "correct": 1,
+      "explanation": "CYP4F2 (rs2108622) reduces vitamin K clearance, leading to higher endogenous vitamin K levels. This is a Tier 4 emerging variant that modifies warfarin dosing algorithms. Cofactor support: Vitamin K2 (MK-7). CYP4F2 testing refines warfarin dose prediction beyond CYP2C9/VKORC1 alone.",
+      "reference": "https://www.clinpgx.org/summaryAnnotation/1449269960",
+      "ref_source": "ClinPGx — CYP4F2 rs2108622 and Vitamin K"
+    },
+    {
+      "id": 46,
+      "category": "STATIN SAFETY",
+      "question": "SLCO1B1 *5 (rs4149056) carriers taking high-dose simvastatin are at highest risk for what?",
+      "options": [
+        "Rhabdomyolysis due to reduced hepatic statin uptake",
+        "Severe migraines",
+        "Renal calculi (kidney stones)",
+        "Acute liver failure"
+      ],
+      "correct": 0,
+      "explanation": "SLCO1B1 *5 (p.Val174Ala) reduces OATP1B1 transporter function, decreasing hepatic uptake of statins and increasing plasma levels. Carriers have significantly increased risk of simvastatin-induced myopathy and rhabdomyolysis. CPIC recommends avoiding high-dose simvastatin in *5 carriers.",
+      "reference": "https://www.clinpgx.org/summaryAnnotation/655384011",
+      "ref_source": "ClinPGx — SLCO1B1 rs4149056 and simvastatin myopathy"
+    },
+    {
+      "id": 47,
+      "category": "STATIN SAFETY",
+      "question": "For a patient who is SLCO1B1 *5/*5 (poor function), what does CPIC recommend for statin therapy?",
+      "options": [
+        "Consider alternative statin (e.g., pravastatin) or use lower simvastatin doses",
+        "Avoid all statins permanently — no alternatives exist",
+        "No action needed — monitor CK only",
+        "Switch to a fibrate instead of any statin"
+      ],
+      "correct": 0,
+      "explanation": "CPIC recommends genotype-guided statin selection. For SLCO1B1 poor function, consider statins with less OATP1B1 dependence (e.g., pravastatin) or use lower simvastatin doses. This approach improves adherence by reducing myopathy risk — the most common reason for statin discontinuation.",
+      "reference": "https://www.clinpgx.org/guideline/PA166264281",
+      "ref_source": "CPIC — SLCO1B1, ABCG2, CYP2C9 and Statins"
+    },
+    {
+      "id": 48,
+      "category": "STATIN SAFETY",
+      "question": "HMGCR (rs17238484, rs3846662) variants affect what aspect of statin therapy?",
+      "options": [
+        "Individual LDL-lowering response variability (HMGCR is the statin target enzyme)",
+        "Rate of statin renal clearance",
+        "Risk of statin-induced liver toxicity",
+        "Interaction with grapefruit juice"
+      ],
+      "correct": 0,
+      "explanation": "HMGCR encodes HMG-CoA reductase, the target enzyme of statins. Variants (rs17238484 intron, rs3846662 alternative splicing) affect statin response variability — the degree of LDL lowering achieved. This is separate from transport (SLCO1B1) and helps explain why some patients achieve better lipid control on the same statin dose.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3098759/",
+      "ref_source": "PharmGKB VIP — HMGCR pharmacogene"
+    },
+    {
+      "id": 49,
+      "category": "UREA CYCLE",
+      "question": "Which is the most common urea cycle disorder, and what is its inheritance pattern?",
+      "options": [
+        "ARG1 deficiency — autosomal dominant",
+        "CPS1 deficiency — autosomal recessive",
+        "NAGS deficiency — mitochondrial",
+        "OTC (Ornithine Transcarbamylase) deficiency — X-linked"
+      ],
+      "correct": 3,
+      "explanation": "OTC deficiency is the most common urea cycle disorder and is X-linked. Mutations (e.g., p.Arg92Gly, p.Arg129His) impair the conversion of carbamoyl phosphate + ornithine → citrulline, causing hyperammonemia. Males are typically more severely affected; females can be symptomatic due to X-inactivation skewing.",
+      "reference": "https://medlineplus.gov/genetics/condition/ornithine-transcarbamylase-deficiency/",
+      "ref_source": "MedlinePlus — OTC Deficiency"
+    },
+    {
+      "id": 50,
+      "category": "UREA CYCLE",
+      "question": "What dietary event can trigger a life-threatening hyperammonemic crisis in a urea cycle disorder patient?",
+      "options": [
+        "High fat meal triggering gallbladder release",
+        "Prolonged fasting with ketone production",
+        "High carbohydrate meal causing insulin surge",
+        "High protein load (e.g., large steak or protein supplement) generating excess ammonia"
+      ],
+      "correct": 3,
+      "explanation": "In urea cycle disorders, the body cannot convert ammonia (from protein catabolism) to urea for excretion. A high protein load generates ammonia faster than the compromised cycle can process it, triggering hyperammonemic crisis: encephalopathy, vomiting, seizures, and potentially death. Management: protein restriction, essential amino acid supplements.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK1217/",
+      "ref_source": "Urea Cycle Disorders Overview - GeneReviews® - NCBI Bookshelf"
+    },
+    {
+      "id": 51,
+      "category": "UREA CYCLE",
+      "question": "NAGS deficiency is unique among urea cycle disorders because it is treatable with which medication?",
+      "options": [
+        "Sodium phenylbutyrate — a nitrogen scavenger",
+        "Allopurinol — to reduce uric acid",
+        "L-arginine — to bypass the metabolic block",
+        "Carglumic acid (N-carbamoylglutamate) — a NAG analog that activates CPS1"
+      ],
+      "correct": 3,
+      "explanation": "NAGS produces N-acetylglutamate (NAG), the required allosteric activator of CPS1 (the first urea cycle enzyme). Carglumic acid (N-carbamoylglutamate) is a stable NAG analog that activates CPS1, restoring urea cycle flux. This makes NAGS deficiency the only urea cycle disorder with a specific pharmacological treatment targeting the root cause.",
+      "reference": "https://medlineplus.gov/genetics/condition/n-acetylglutamate-synthase-deficiency/",
+      "ref_source": "MedlinePlus — NAGS Deficiency"
+    },
+    {
+      "id": 52,
+      "category": "ANTIOXIDANT ENZYMES",
+      "question": "SOD2 (Mn-superoxide dismutase) Ala16Val (rs4880) — the Val/Val genotype has what functional consequence?",
+      "options": [
+        "Shifts SOD2 from mitochondria to cytosol",
+        "More efficient mitochondrial targeting with enhanced protection",
+        "Less efficient mitochondrial targeting → reduced mitochondrial antioxidant defense",
+        "Complete loss of SOD2 enzyme activity"
+      ],
+      "correct": 2,
+      "explanation": "SOD2 Ala16Val (rs4880) — the Val allele has less efficient mitochondrial targeting sequence, resulting in lower SOD2 protein reaching the mitochondrial matrix. Val/Val carriers have reduced mitochondrial antioxidant defense and variable cancer risk. SOD2 requires manganese (Mn) as an essential cofactor.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 53,
+      "category": "ANTIOXIDANT ENZYMES",
+      "question": "GPX1 (glutathione peroxidase 1) variants (rs1050450) reduce enzyme activity. Which mineral is the essential cofactor for GPX1?",
+      "options": [
+        "Copper — electron transfer cofactor",
+        "Iron — part of the heme group",
+        "Zinc — required for structural integrity",
+        "Selenium — supplementation can improve GPX1 activity in variant carriers"
+      ],
+      "correct": 3,
+      "explanation": "GPX1 (p.Pro200Leu, rs1050450) is a selenium-dependent enzyme. Selenium is incorporated as selenocysteine at the active site. Variant carriers with reduced activity can benefit from selenium supplementation. GPX1 detoxifies hydrogen peroxide and protects against membrane lipid peroxidation. GPX4 (phospholipid hydroperoxide) is also selenium-dependent.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 54,
+      "category": "ANTIOXIDANT ENZYMES",
+      "question": "NQO1 Pro187Ser (rs1800566) null/null carriers have increased susceptibility to what toxin?",
+      "options": [
+        "Lead exposure (inability to chelate heavy metals)",
+        "Asbestos fibers (impaired macrophage clearance)",
+        "Benzene toxicity (inability to detoxify quinones)",
+        "Mercury vapor (impaired metallothionein response)"
+      ],
+      "correct": 2,
+      "explanation": "NQO1 (NAD(P)H quinone oxidoreductase 1) p.Pro187Ser (rs1800566) — null/null genotype eliminates the two-electron reduction of quinones. This significantly increases susceptibility to benzene toxicity (benzene metabolizes to toxic quinones) and cancer risk from quinone-containing xenobiotics. NQO1 requires FAD as a cofactor.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3155573/",
+      "ref_source": "Benzene toxicity: The role of the susceptibility factor NQO1 in bone ..."
+    },
+    {
+      "id": 55,
+      "category": "OXALATE METABOLISM",
+      "question": "AGXT G170R is the most common variant in Primary Hyperoxaluria Type I. What proportion of G170R carriers respond to B6 (pyridoxine)?",
+      "options": [
+        "0% — B6 has no effect on AGXT variants",
+        "100% — all carriers respond completely",
+        "Only 5-10% show any response",
+        "Approximately 50% are B6-responsive (PLP is the AGXT cofactor)"
+      ],
+      "correct": 3,
+      "explanation": "AGXT (alanine-glyoxylate aminotransferase) uses vitamin B6 (pyridoxal phosphate, PLP) as cofactor to convert glyoxylate → glycine. The G170R variant (c.508G>A) is the most common PH Type I allele, and ~50% of G170R carriers show B6-responsive reduction in urinary oxalate. B6 enhances glyoxylate → glycine conversion, reducing oxalate overflow.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK154378/",
+      "ref_source": "GeneReviews — Primary Hyperoxaluria Type 1"
+    },
+    {
+      "id": 56,
+      "category": "OXALATE METABOLISM",
+      "question": "High-dose Vitamin C (>1g/day) has what paradoxical effect on kidney stone risk?",
+      "options": [
+        "Decreases oxalate by enhancing renal clearance",
+        "Binds oxalate in the gut preventing absorption",
+        "Increases urinary oxalate (ascorbate → oxalate via dehydroascorbate)",
+        "Has no measurable effect on oxalate levels"
+      ],
+      "correct": 2,
+      "explanation": "Vitamin C (ascorbate) is metabolized to oxalate via dehydroascorbate. Doses >1g/day significantly increase urinary oxalate, raising calcium oxalate stone risk. This is counterintuitive — a vitamin often associated with health can worsen the very condition (kidney stones) it might seem to help. Monitor high-dose Vitamin C in stone formers.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 57,
+      "category": "OXALATE METABOLISM",
+      "question": "Which dietary strategy is counterintuitively effective for reducing kidney stone risk in hyperoxaluria?",
+      "options": [
+        "Take high-dose Vitamin C to acidify urine",
+        "Increase dietary calcium — it binds oxalate in the gut, preventing absorption",
+        "Avoid all dietary calcium completely",
+        "Increase spinach and beet intake for antioxidants"
+      ],
+      "correct": 1,
+      "explanation": "Dietary calcium actually REDUCES stone risk. Calcium binds oxalate in the intestinal lumen, preventing oxalate absorption and reducing urinary oxalate. Paradoxically, calcium restriction increases oxalate absorption (nothing to bind it in the gut). Magnesium also helps by forming soluble Mg-oxalate, inhibiting calcium oxalate crystallization.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1455427/",
+      "ref_source": "Strategies for preventing calcium oxalate stones - PMC - NIH"
+    },
+    {
+      "id": 58,
+      "category": "VITAMIN D PROCESSING",
+      "question": "VDR FokI (rs2228570) — the F allele produces what effect on vitamin D receptor function?",
+      "options": [
+        "Reduced affinity for 1,25-OH-D (calcitriol)",
+        "A shorter protein (3 amino acids fewer) with increased transcriptional activity",
+        "A completely non-functional vitamin D receptor",
+        "Enhanced vitamin D degradation via CYP24A1"
+      ],
+      "correct": 1,
+      "explanation": "VDR FokI (rs2228570, c.2T>C) creates a start codon variant. The F allele produces a 3-amino-acid shorter VDR protein with higher transcriptional activity. F/F genotype = highest VDR activity; f/f = reduced activity. This affects bone density, immune response, calcium absorption, and cancer risk.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7609507/",
+      "ref_source": "PMC — VDR FokI polymorphism"
+    },
+    {
+      "id": 59,
+      "category": "VITAMIN D PROCESSING",
+      "question": "GC (Vitamin D Binding Protein) variants (Gc1f, Gc1s, Gc2) affect what clinically?",
+      "options": [
+        "Vitamin D receptor sensitivity at the nuclear level",
+        "Bioavailable 25-OH-D levels — Gc2 carriers may have low bioavailable D despite normal total levels",
+        "Renal calcium reabsorption independent of vitamin D",
+        "Rate of vitamin D photosynthesis in skin"
+      ],
+      "correct": 1,
+      "explanation": "GC (vitamin D binding protein) variants — Gc1f (highest binding), Gc1s, Gc2 (lowest binding) — determine how much 25-OH-D is protein-bound vs. bioavailable (free). Gc2 carriers may have normal total 25-OH-D on standard labs but lower bioavailable vitamin D. This explains why some patients have low vitamin D symptoms despite 'normal' lab results.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6677641/",
+      "ref_source": "Vitamin D binding protein polymorphisms significantly impact ..."
+    },
+    {
+      "id": 60,
+      "category": "VITAMIN D PROCESSING",
+      "question": "CYP2R1 (vitamin D 25-hydroxylase) variants affect which step in vitamin D metabolism?",
+      "options": [
+        "Converting 25-OH-D to active 1,25-OH-D (renal activation)",
+        "Converting vitamin D3 to 25-OH-D (the first hydroxylation, in the liver)",
+        "Degrading 25-OH-D via 24-hydroxylation (catabolism)",
+        "Transporting vitamin D into the cell nucleus"
+      ],
+      "correct": 1,
+      "explanation": "CYP2R1 is the primary vitamin D 25-hydroxylase, converting vitamin D3 (cholecalciferol) to 25-OH-D (calcifediol) — the first hydroxylation step in the liver. Variants (rs10741657) affect 25-OH-D levels and hypovitaminosis D risk. CYP27B1 then converts 25-OH-D → 1,25-OH-D (calcitriol) in the kidney. CYP24A1 catabolizes both.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3462929/",
+      "ref_source": "Mutation of the CYP2R1 Vitamin D 25-Hydroxylase in a Saudi Arabian ..."
+    },
+    {
+      "id": 61,
+      "category": "NEUROTRANSMITTERS",
+      "question": "MAOA 5'UTR VNTR — the 3R ('low activity') allele is associated with what behavioral pattern under stress?",
+      "options": [
+        "Protection against Parkinson's disease",
+        "Enhanced serotonin synthesis and calm demeanor",
+        "Aggression and impulsivity associations (context-dependent, weak effect size)",
+        "Complete absence of monoamine metabolism"
+      ],
+      "correct": 2,
+      "explanation": "MAOA 5'UTR VNTR (30bp repeat) — 3.5R/4R = lower expression, 5R = higher expression. The 3R allele ('low activity') is associated with aggression/impulsivity under stress (the 'Warrior gene' controversy). These associations are weak and context-dependent — environment plays a critical role. MAOA requires FAD as a cofactor.",
+      "reference": "https://pubmed.ncbi.nlm.nih.gov/16445837/",
+      "ref_source": "PubMed — MTHFR C677T folate metabolism"
+    },
+    {
+      "id": 62,
+      "category": "NEUROTRANSMITTERS",
+      "question": "TPH2 (neuronal tryptophan hydroxylase) variants affect what aspect of neurotransmission?",
+      "options": [
+        "Melatonin production in the pineal gland",
+        "Dopamine clearance in the prefrontal cortex",
+        "Brain serotonin synthesis — associated with depression, suicide risk, and anxiety",
+        "Peripheral (gut) serotonin synthesis only"
+      ],
+      "correct": 2,
+      "explanation": "TPH2 is the rate-limiting enzyme for brain serotonin synthesis (TPH1 is the peripheral isoform). Variants (rs7305115, rs4570625) reduce serotonin production and are associated with depression, suicide risk, and anxiety. TPH2 requires iron and BH4 (tetrahydrobiopterin) as cofactors. BH4 is recycled by MTHFR A1298C.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2792355/",
+      "ref_source": "Functional polymorphisms of the brain serotonin synthesizing ..."
+    },
+    {
+      "id": 63,
+      "category": "NEUROTRANSMITTERS",
+      "question": "SERT (SLC6A4) 5-HTTLPR L/S polymorphism — what does the S/S (short/short) genotype mean clinically?",
+      "options": [
+        "Increased transporter expression → rapid serotonin clearance",
+        "No known clinical relevance in psychiatry",
+        "Decreased transporter expression → increased depression risk, especially under stress; affects SSRI response",
+        "Causes serotonin syndrome in all carriers"
+      ],
+      "correct": 2,
+      "explanation": "SERT 5-HTTLPR — L/L = high expression, S/S = low expression (decreased serotonin transporter). S/S carriers have increased depression risk under stress (gene-environment interaction, one of the most studied in psychiatry) and may respond differently to SSRIs. The transporter is the target of SSRIs — lower baseline expression may alter drug response.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12416559/",
+      "ref_source": "The Role of the 5-HTTLPR Gene Variation of the SLC6A4 ..."
+    },
+    {
+      "id": 64,
+      "category": "HEME & PORPHYRIA",
+      "question": "Which is the most common acute porphyria, and what gene is affected?",
+      "options": [
+        "Porphyria Cutanea Tarda — UROD gene",
+        "Variegate Porphyria — PPOX gene",
+        "Acute Intermittent Porphyria (AIP) — HMBS (PBG deaminase) gene",
+        "Hereditary Coproporphyria — CPOX gene"
+      ],
+      "correct": 2,
+      "explanation": "Acute Intermittent Porphyria (AIP) is the most common acute porphyria, caused by HMBS (hydroxymethylbilane synthase / PBG deaminase) variants (e.g., p.Arg149Trp, p.Arg173Trp). AIP causes neurovisceral attacks: severe abdominal pain, neuropathy, psychiatric symptoms, and autonomic dysfunction. Attacks are triggered by drugs, fasting, hormones, and infections.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK1193/",
+      "ref_source": "GeneReviews — Acute Intermittent Porphyria"
+    },
+    {
+      "id": 65,
+      "category": "HEME & PORPHYRIA",
+      "question": "Which drug class is a classic precipitant of acute porphyric attacks and must be avoided?",
+      "options": [
+        "Beta-blockers (metoprolol, propranolol)",
+        "Penicillin antibiotics",
+        "Acetaminophen (paracetamol)",
+        "Barbiturates (CYP450 inducers that upregulate ALA synthase)"
+      ],
+      "correct": 3,
+      "explanation": "Barbiturates (phenobarbital, secobarbital) are potent CYP450 inducers that upregulate ALA synthase, driving heme biosynthesis. In porphyria patients, this overwhelms the defective enzyme, causing toxic accumulation of ALA and PBG. Other triggers: phenytoin, carbamazepine, valproate, sulfonamides, estrogens, fasting, and infections.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK1193/",
+      "ref_source": "Acute Intermittent Porphyria - GeneReviews® - NCBI Bookshelf"
+    },
+    {
+      "id": 66,
+      "category": "HEME & PORPHYRIA",
+      "question": "Which medications are considered SAFE to use in patients with acute porphyria?",
+      "options": [
+        "Estrogen-containing oral contraceptives",
+        "Gabapentin, levetiracetam, and acetaminophen",
+        "Phenobarbital and erythromycin",
+        "Valproate and carbamazepine"
+      ],
+      "correct": 1,
+      "explanation": "Safe alternatives in acute porphyria include gabapentin, levetiracetam, and acetaminophen — these do not induce CYP450 or upregulate ALA synthase. Porphyric patients should always carry a safe-drug list, as many common medications (including OTC products) can trigger life-threatening attacks. Check the European Porphyria Network drug database before prescribing.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK1193/",
+      "ref_source": "Acute Intermittent Porphyria - GeneReviews® - NCBI Bookshelf"
+    },
+    {
+      "id": 67,
+      "category": "FATTY ACID OXIDATION",
+      "question": "MCAD deficiency (ACADM c.985A>G) is the most common fatty acid oxidation disorder. What is the classic presentation?",
+      "options": [
+        "Hypoketotic hypoglycemia during fasting — can cause sudden death if undiagnosed",
+        "Exercise-induced rhabdomyolysis only",
+        "Hyperglycemic crisis with ketoacidosis",
+        "Seizures without any metabolic trigger"
+      ],
+      "correct": 0,
+      "explanation": "MCAD deficiency (c.985A>G, p.Lys329Glu — 90% of disease alleles) is the most common FAOD (1:15,000). During fasting, patients cannot oxidize medium-chain fatty acids → hypoketotic hypoglycemia (low blood sugar with no ketones as alternative fuel). Can cause sudden death in undiagnosed children. MCAD requires FAD (riboflavin-derived) as cofactor. Treatment: avoid fasting, cornstarch.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK1253/",
+      "ref_source": "GeneReviews — MCAD Deficiency"
+    },
+    {
+      "id": 68,
+      "category": "FATTY ACID OXIDATION",
+      "question": "CPT2 (Carnitine Palmitoyltransferase II) deficiency classically presents with what?",
+      "options": [
+        "Exercise-induced myopathy and rhabdomyolysis after prolonged exertion or fasting",
+        "Hypoglycemia without any muscle symptoms",
+        "Severe cardiomyopathy in the neonatal period only",
+        "Progressive liver failure without muscle involvement"
+      ],
+      "correct": 0,
+      "explanation": "CPT2 deficiency (p.Ser113Leu — common mild form) prevents long-chain fatty acids from entering mitochondria via the carnitine shuttle. Classic presentation: exercise-induced myopathy, rhabdomyolysis, and myoglobinuria after prolonged exercise, fasting, or cold exposure. Severe infantile form (p.Arg631Cys) causes cardiomyopathy. Treatment: avoid fasting, medium-chain triglycerides.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK1253/",
+      "ref_source": "Carnitine Palmitoyltransferase II Deficiency - GeneReviews - NCBI"
+    },
+    {
+      "id": 69,
+      "category": "FATTY ACID OXIDATION",
+      "question": "Late-onset MADD (ETFDH variants) is notable for being dramatically responsive to which vitamin?",
+      "options": [
+        "Vitamin B6 (pyridoxine) — standard RDA doses",
+        "Vitamin K (phytonadione) — for coagulation support",
+        "Riboflavin (B2) — 100-400 mg daily can produce dramatic improvement",
+        "Vitamin B12 (cobalamin) — IM injections weekly"
+      ],
+      "correct": 2,
+      "explanation": "Late-onset MADD (Multiple Acyl-CoA Dehydrogenase Deficiency) caused by ETFDH variants (e.g., p.Ala84Thr) is dramatically riboflavin-responsive. Riboflavin (B2) is the precursor for FAD, the essential cofactor for all ACAD (acyl-CoA dehydrogenase) enzymes. Treatment with 100-400 mg riboflavin daily can produce dramatic improvement in myopathy and metabolic acidosis.",
+      "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6921586/",
+      "ref_source": "case reports and epidemiology of ETFDH gene mutations - PMC"
+    },
+    {
+      "id": 70,
+      "category": "LYSOSOMAL DISORDERS",
+      "question": "Gaucher disease (GBA gene) is the most common lysosomal storage disorder. What is the primary clinical presentation of Type 1?",
+      "options": [
+        "Severe cardiomyopathy without organomegaly",
+        "Progressive renal failure and hearing loss",
+        "Rapid neurodegeneration and cherry-red spot only",
+        "Hepatosplenomegaly, cytopenia, bone disease — plus increased Parkinsonism risk"
+      ],
+      "correct": 3,
+      "explanation": "Gaucher disease (GBA, p.Asn370Ser, p.Leu444Pro) causes glucocerebroside accumulation in macrophages. Type 1 (most common, non-neuronopathic): hepatosplenomegaly, cytopenia, bone disease (bone pain, fractures). Notably, GBA mutation carriers have significantly increased Parkinsonism risk. Treatment: ERT (imiglucerase) or SRT (eliglustat, miglustat).",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK1269/",
+      "ref_source": "GeneReviews — Gaucher Disease"
+    },
+    {
+      "id": 71,
+      "category": "LYSOSOMAL DISORDERS",
+      "question": "Fabry disease (GLA, X-linked) has which hallmark clinical features?",
+      "options": [
+        "Hepatosplenomegaly and bone fractures only",
+        "Cherry-red spot and infantile neurodegeneration",
+        "Neuropathic pain, angiokeratomas, renal failure, and stroke",
+        "Recurrent fractures and blue sclerae"
+      ],
+      "correct": 2,
+      "explanation": "Fabry disease (GLA, X-linked) causes accumulation of globotriaosylceramide (Gb3) in lysosomes. Hallmark features: neuropathic pain (acroparesthesia), angiokeratomas (skin lesions), renal failure, stroke, and cardiac involvement (hypertrophic cardiomyopathy). Treatment: ERT (agalsidase) or chaperone therapy (migalastat for amenable GLA variants).",
+      "reference": "https://omim.org/entry/259900",
+      "ref_source": "OMIM — Fabry Disease (GLA)"
+    },
+    {
+      "id": 72,
+      "category": "LYSOSOMAL DISORDERS",
+      "question": "Pompe disease (GAA) is unique because it is both a glycogen storage disease (Type II) AND a lysosomal storage disorder. What is the treatment?",
+      "options": [
+        "Liver transplantation for metabolic correction",
+        "High-dose vitamin B6 (pyridoxine) supplementation",
+        "Enzyme replacement therapy with alglucosidase alfa",
+        "Cornstarch therapy to maintain blood glucose"
+      ],
+      "correct": 2,
+      "explanation": "Pompe disease (GAA, acid α-glucosidase deficiency) causes glycogen accumulation in lysosomes. Infantile form: severe cardiomyopathy and hypotonia. Late-onset: progressive myopathy. The c.-32-13T>G splice variant is the most common late-onset allele. Treatment: ERT with alglucosidase alfa (recombinant GAA). CRISPR gene therapy trials are also ongoing.",
+      "reference": "https://www.ncbi.nlm.nih.gov/books/NBK1261/",
+      "ref_source": "Pompe Disease - GeneReviews® - NCBI Bookshelf"
+    }
+  ]
+};
+
+
+// --- State ---
+let state = {
+  screen: 'start',
+  mode: null,
+  questionOrder: [],
+  currentIdx: 0,
+  answers: [],
+  selectedOption: null,
+  showExplanation: false,
+};
+
+// --- Helpers ---
+function getByCategory(cat) {
+  return QUIZ_DATA.questions
+    .map((q, i) => ({ q, i }))
+    .filter(x => x.q.category === cat)
+    .map(x => x.i);
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+// --- Render ---
+const app = document.getElementById('app');
+
+function render() {
+  if (state.screen === 'start') renderStart();
+  else if (state.screen === 'category-select') renderCategorySelect();
+  else if (state.screen === 'quiz') renderQuiz();
+  else if (state.screen === 'results') renderResults();
+}
+
+function renderStart() {
+  app.innerHTML = `
+    <div class="start-screen">
+      <div class="start-hero">
+        <h1>${esc(QUIZ_DATA.title)}</h1>
+        <p class="tagline">${esc(QUIZ_DATA.subtitle)}</p>
+        <div class="start-stats">
+          <div class="stat"><div class="stat-num">${QUIZ_DATA.questions.length}</div><div class="stat-label">Questions</div></div>
+          <div class="stat"><div class="stat-num">${QUIZ_DATA.categories.length}</div><div class="stat-label">Categories</div></div>
+          <div class="stat"><div class="stat-num">4</div><div class="stat-label">Options Each</div></div>
+        </div>
+      </div>
+      <div class="mode-cards">
+        <button class="mode-btn" onclick="startAll()">
+          <span class="icon">🎯</span>
+          <span class="btn-content">
+            <span class="btn-title">Play All Questions</span>
+            <span class="btn-desc">All ${QUIZ_DATA.questions.length} questions in shuffled order</span>
+          </span>
+        </button>
+        <button class="mode-btn" onclick="goCategorySelect()">
+          <span class="icon">📚</span>
+          <span class="btn-content">
+            <span class="btn-title">Choose a Category</span>
+            <span class="btn-desc">Focus on one topic — pick from ${QUIZ_DATA.categories.length} categories</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function goCategorySelect() {
+  state.screen = 'category-select';
+  render();
+}
+
+function renderCategorySelect() {
+  const cards = QUIZ_DATA.categories.map(c => {
+    const count = getByCategory(c.name).length;
+    return `
+      <div class="cat-card" onclick="startCategory('${esc(c.name)}')">
+        <div class="emoji">${c.emoji}</div>
+        <div class="name">${esc(c.name)}</div>
+        <div class="desc">${esc(c.description)}</div>
+        <span class="count">${count} questions</span>
+      </div>
+    `;
+  }).join('');
+
+  app.innerHTML = `
+    <div class="section-header">
+      <h2>Select a Category</h2>
+      <button class="back-btn" onclick="state.screen='start'; render();">← Back</button>
+    </div>
+    <div class="category-grid">${cards}</div>
+  `;
+}
+
+function startAll() {
+  state.mode = 'all';
+  state.questionOrder = shuffle([...Array(QUIZ_DATA.questions.length).keys()]);
+  state.currentIdx = 0;
+  state.answers = [];
+  state.selectedOption = null;
+  state.showExplanation = false;
+  state.screen = 'quiz';
+  render();
+}
+
+function startCategory(cat) {
+  state.mode = cat;
+  state.questionOrder = shuffle(getByCategory(cat));
+  state.currentIdx = 0;
+  state.answers = [];
+  state.selectedOption = null;
+  state.showExplanation = false;
+  state.screen = 'quiz';
+  render();
+}
+
+function renderQuiz() {
+  const qi = state.questionOrder[state.currentIdx];
+  const q = QUIZ_DATA.questions[qi];
+  const progress = ((state.currentIdx + 1) / state.questionOrder.length) * 100;
+  const cat = QUIZ_DATA.categories.find(c => c.name === q.category);
+  const answered = state.answers[state.currentIdx];
+
+  const optionsHTML = q.options.map((opt, i) => {
+    let cls = 'option-btn';
+    if (answered) {
+      cls += ' disabled';
+      if (i === q.correct) cls += ' correct';
+      else if (i === answered.selected) cls += ' incorrect';
+    } else if (state.selectedOption === i) {
+      cls += ' selected';
+    }
+    const letter = String.fromCharCode(65 + i);
+    return `<button class="${cls}" onclick="selectOption(${i})" ${answered ? 'disabled' : ''}>
+      <span class="option-letter">${letter}</span>${esc(opt)}
+    </button>`;
+  }).join('');
+
+  let explHTML = '';
+  if (state.showExplanation && answered) {
+    const isCorrect = answered.selected === q.correct;
+    explHTML = `
+      <div class="explanation show">
+        <strong class="${isCorrect ? 'result-correct' : 'result-incorrect'}">${isCorrect ? '✅ Correct!' : '❌ Incorrect.'}</strong><br>
+        <strong>Answer:</strong> ${String.fromCharCode(65 + q.correct)}) ${esc(q.options[q.correct])}<br><br>
+        ${esc(q.explanation)}<br><br>
+        <a href="${q.reference}" target="_blank" rel="noopener" style="color:var(--primary);font-size:0.85em;text-decoration:none;">📖 ${esc(q.ref_source)} ↗</a>
+      </div>
+    `;
+  }
+
+  const isLast = state.currentIdx === state.questionOrder.length - 1;
+  const hasAnswered = !!answered;
+
+  app.innerHTML = `
+    <div class="quiz-header">
+      <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
+      <span class="progress-text">${state.currentIdx + 1} / ${state.questionOrder.length}</span>
+    </div>
+    <span class="category-badge">${cat ? cat.emoji : ''} ${esc(q.category)}</span>
+    <div class="question-card">
+      <div class="question-text">${esc(q.question)}</div>
+      ${optionsHTML}
+      ${explHTML}
+    </div>
+    <div class="nav-buttons">
+      <button class="nav-btn secondary ${state.currentIdx === 0 ? 'hidden' : ''}" onclick="prevQuestion()">← Previous</button>
+      <span class="nav-spacer"></span>
+      ${!hasAnswered
+        ? `<button class="nav-btn primary" onclick="submitAnswer()" ${state.selectedOption === null ? 'disabled' : ''}>Check Answer</button>`
+        : isLast
+          ? `<button class="nav-btn primary" onclick="finishQuiz()">See Results →</button>`
+          : `<button class="nav-btn primary" onclick="nextQuestion()">Next →</button>`
+      }
+    </div>
+  `;
+}
+
+function selectOption(i) {
+  if (state.answers[state.currentIdx]) return;
+  state.selectedOption = i;
+  render();
+}
+
+function submitAnswer() {
+  if (state.selectedOption === null) return;
+  const qi = state.questionOrder[state.currentIdx];
+  const q = QUIZ_DATA.questions[qi];
+  const isCorrect = state.selectedOption === q.correct;
+  state.answers[state.currentIdx] = {
+    questionIndex: qi,
+    selected: state.selectedOption,
+    correct: isCorrect
+  };
+  state.showExplanation = true;
+  render();
+}
+
+function nextQuestion() {
+  if (state.currentIdx < state.questionOrder.length - 1) {
+    state.currentIdx++;
+    state.selectedOption = null;
+    state.showExplanation = false;
+    render();
+  }
+}
+
+function prevQuestion() {
+  if (state.currentIdx > 0) {
+    state.currentIdx--;
+    state.selectedOption = state.answers[state.currentIdx]?.selected ?? null;
+    state.showExplanation = !!state.answers[state.currentIdx];
+    render();
+  }
+}
+
+function finishQuiz() {
+  state.screen = 'results';
+  render();
+}
+
+function renderResults() {
+  const total = state.questionOrder.length;
+  const correctCount = state.answers.filter(a => a.correct).length;
+  const pct = Math.round((correctCount / total) * 100);
+  const scoreClass = pct >= 80 ? 'high' : pct >= 50 ? 'mid' : 'low';
+
+  const catStats = {};
+  state.answers.forEach(a => {
+    const q = QUIZ_DATA.questions[a.questionIndex];
+    if (!catStats[q.category]) catStats[q.category] = { correct: 0, total: 0 };
+    catStats[q.category].total++;
+    if (a.correct) catStats[q.category].correct++;
+  });
+
+  const breakdownHTML = Object.entries(catStats).map(([cat, stats]) => {
+    const catObj = QUIZ_DATA.categories.find(c => c.name === cat);
+    const ratio = stats.correct / stats.total;
+    const scoreCls = ratio === 1 ? 'all-correct' : ratio === 0 ? 'all-wrong' : 'some-wrong';
+    const barColor = ratio === 1 ? 'var(--correct)' : ratio === 0 ? 'var(--incorrect)' : 'var(--warn)';
+    return `<div class="breakdown-row">
+      <span class="cat">${catObj ? catObj.emoji : ''} ${esc(cat)}</span>
+      <span style="display:flex; align-items:center;">
+        <span class="breakdown-bar"><span class="breakdown-bar-fill" style="width:${ratio*100}%; background:${barColor};"></span></span>
+        <span class="score ${scoreCls}" style="margin-left:8px;">${stats.correct}/${stats.total}</span>
+      </span>
+    </div>`;
+  }).join('');
+
+  const wrongAnswers = state.answers.filter(a => !a.correct);
+  let reviewHTML = '';
+  if (wrongAnswers.length > 0) {
+    const reviewItems = wrongAnswers.map(a => {
+      const q = QUIZ_DATA.questions[a.questionIndex];
+      return `<div class="review-item incorrect">
+        <div class="q">${esc(q.question)}</div>
+        <div class="a">
+          <span class="your-answer">Your answer: ${String.fromCharCode(65 + a.selected)}) ${esc(q.options[a.selected])}</span><br>
+          <span class="correct-answer">Correct: ${String.fromCharCode(65 + q.correct)}) ${esc(q.options[q.correct])}</span>
+          <div class="explanation-text">${esc(q.explanation)}<br><br><a href="${q.reference}" target="_blank" rel="noopener" style="color:var(--primary);font-size:0.85em;text-decoration:none;">📖 ${esc(q.ref_source)} ↗</a></div>
+        </div>
+      </div>`;
+    }).join('');
+    reviewHTML = `
+      <div class="review-section">
+        <div class="breakdown-card">
+          <h3>📖 Review Missed Questions (${wrongAnswers.length})</h3>
+          ${reviewItems}
+        </div>
+      </div>
+    `;
+  }
+
+  app.innerHTML = `
+    <div class="results-screen">
+      <div class="results-hero">
+        <h2>Quiz Complete!</h2>
+        <p class="mode-label">${esc(state.mode === 'all' ? 'All Categories' : state.mode)}</p>
+        <div class="score-circle ${scoreClass}">${pct}%</div>
+        <p class="score-detail">${correctCount} out of ${total} correct</p>
+      </div>
+      <div class="breakdown-card">
+        <h3>📊 Category Breakdown</h3>
+        ${breakdownHTML}
+      </div>
+      ${reviewHTML}
+      <div class="results-actions">
+        <button class="nav-btn primary" onclick="startAll()">🔄 Play Again (All)</button>
+        <button class="nav-btn secondary" onclick="goCategorySelect()">📚 Choose Category</button>
+        <button class="nav-btn secondary" onclick="state.screen='start'; render();">🏠 Home</button>
+      </div>
+    </div>
+  `;
+}
+
+// Init
+render();
+</script>
+</body>
+</html>
